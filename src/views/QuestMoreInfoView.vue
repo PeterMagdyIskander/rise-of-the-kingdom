@@ -1,6 +1,7 @@
 <template>
     <div>
-        <QuestMoreInfo :title="'Quest Info'" :quest="quest[0]"></QuestMoreInfo>
+        <app-header :title="'Rise Of The Kingdom'" :subtitle="'Quest Info'"></app-header>
+        <QuestMoreInfo :quest="quest[0]"></QuestMoreInfo>
 
         <div class="button-container">
             <button @click="accept">START</button>
@@ -13,10 +14,12 @@ import router from '@/router'
 import { mapGetters, mapActions } from 'vuex';
 import { collection, doc, getFirestore, updateDoc, arrayUnion } from 'firebase/firestore';
 import QuestMoreInfo from '@/components/Quest/QuestMoreInfo.vue';
+import AppHeader from '@/components/Shared/AppHeader.vue';
 export default {
     name: "quest-more-info-view",
     components: {
-        QuestMoreInfo
+        QuestMoreInfo,
+        AppHeader
     },
     data() {
         return {

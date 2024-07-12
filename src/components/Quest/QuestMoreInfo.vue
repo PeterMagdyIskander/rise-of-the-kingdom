@@ -1,12 +1,5 @@
 <template>
     <div class="quest-info-container">
-        <div class="header-container">
-            <p class="logo">Level Up</p>
-            <p class="title">{{ title }}</p>
-        </div>
-        <p class="title">
-            Quest Details
-        </p>
         <div class="quest-info-container-details" v-if="quest">
             <p class="title">{{ quest.title }}</p>
             <p class="sub-title">Task: {{ quest.description }}</p>
@@ -44,13 +37,11 @@
 </template>
 
 <script>
+import AppHeader from '../Shared/AppHeader.vue'
 export default {
+  components: { AppHeader },
     name: "quest-more-info",
     props: {
-        title: {
-            type: String,
-            required: true,
-        },
         quest: {
             type: Object,
             required: true,
@@ -80,6 +71,7 @@ p {
         display: flex;
         flex-direction: column;
         row-gap: 15px;
+        margin-top: 50px;
     }
 
     & .sub-title {
@@ -88,23 +80,6 @@ p {
     }
 }
 
-.header-container {
-    width: 100%;
-    height: 150px;
-    background-color: #162041;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 20px;
-
-    & .logo {
-        font-family: 'pressstart2p';
-        color: #f4ee80;
-        text-shadow: 1px 2px #a14759;
-        font-size: 14px;
-    }
-}
 
 .more-info {
     display: flex;

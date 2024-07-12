@@ -1,5 +1,5 @@
 <template>
-  <div id="sidemenu" v-if="getUser!=null && getUser?.role!='ADMIN'">
+  <div id="sidemenu" v-if="getUser != null && getUser?.role != 'ADMIN'">
     <button class="sidemenu__btn" v-on:click="navOpen = !navOpen" v-bind:class="{ active: navOpen }">
       <span class="top"></span>
       <span class="mid"></span>
@@ -15,6 +15,7 @@
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/MyQuest">My Quest</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/QRCode">My QR Code</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/TeamRoles">Roles</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu"><router-link to="/AddQuest">Add Quest</router-link></li>
           </ul>
         </div>
       </nav>
@@ -46,14 +47,15 @@ export default {
 html,
 body {
   height: 100%;
-  background-image: linear-gradient(#252a52 .1em, transparent .1em), linear-gradient(90deg, #252a52 .1em, transparent .1em);
+  background-image: radial-gradient(#1f3932 1px, transparent 0);
   background-size: 2em 2em;
-  background-color: #17182d !important;
+  background-color: #002225 !important;
 
   >* {
     color: #FFF;
   }
 }
+
 #app {
   height: 100%;
   position: relative;
@@ -65,9 +67,9 @@ body {
   nav {
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(#252a52 .1em, transparent .1em), linear-gradient(90deg, #252a52 .1em, transparent .1em);
+    background-image: radial-gradient(#1f3932 1px, transparent 0);
     background-size: 2em 2em;
-    background-color: #17182d !important;
+    background-color: #002225 !important;
     position: absolute;
     top: 0;
     left: 0;
@@ -176,12 +178,13 @@ body {
   transform: translateX(-200px);
   opacity: 0;
 }
+
 // a{
 //   font-family: 'ptmono';
 // }
 a.router-link-active {
   all: unset;
-  font-family: 'pressstart2p'!important;
+  font-family: 'pressstart2p' !important;
   color: #f4ee80 !important;
   font-size: 1.5rem;
   text-shadow: 0 3px #a14759;

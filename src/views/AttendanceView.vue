@@ -9,40 +9,16 @@ import { collection, getFirestore, onSnapshot, doc, updateDoc, increment } from 
 import { mapActions, mapGetters } from 'vuex';
 export default {
     name: "attendance-view",
-    data() {
-        return {
-
-        }
-    },
     computed: mapGetters(['getUser', 'getQuests', 'getLoading', 'getFailed', mapActions]),
     mounted() {
-
-        if (this.getUser !== null && this.getUser.role === "ADMIN")
-            this.addAttendance(this.$route.params.uid)
-        else
-            console.error("Das")
-
+        console.log(this.$route)
+        const uid=this.$route.query.redirect.split('/')[2]
+        this.addAttendance(uid)
     },
     methods: {
         ...mapActions(['login', 'setQuests']),
-        selectUser(user) {
-            this.selectedUser = user;
-            this.selectedUserName = this.users.filter(user => user.id === this.selectedUser)[0].name;
-            const firestore = getFirestore();
-            const userCollectionReference = collection(firestore, 'users');
-            const userDoc = doc(userCollectionReference, this.selectedUser);
-            onSnapshot(userDoc, snapshot => {
-                this.selectedUserObject = { ...snapshot.data() };
-                const teamCollectionReference = collection(firestore, 'teams');
-                const myTeam = doc(teamCollectionReference, this.selectedUserObject.teamId)
-                onSnapshot(myTeam, snapshot => {
-                    this.myTeamData = { ...snapshot.data() };
-                })
-            })
-
-
-        },
         addAttendance(uid) {
+            alert(uid)
             const firestore = getFirestore();
             const userCollectionReference = collection(firestore, 'users');
             const userDoc = doc(userCollectionReference, uid);

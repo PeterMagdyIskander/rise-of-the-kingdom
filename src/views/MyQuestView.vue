@@ -1,6 +1,7 @@
 <template>
     <div>
-        <QuestMoreInfo :title="'My Quest'" :quest="quest"></QuestMoreInfo>
+        <app-header :title="'Rise Of The Kingdom'" :subtitle="'My Quest'"></app-header>
+        <QuestMoreInfo :quest="quest"></QuestMoreInfo>
         <div class="button-container" v-if="quest">
             <input type="password" v-model="password">
             <button @click="submit">SUBMIT</button>
@@ -14,11 +15,13 @@ import { mapGetters, mapActions } from 'vuex';
 import { collection, doc, getFirestore, updateDoc, increment } from 'firebase/firestore';
 import router from '@/router';
 import QuestMoreInfo from '@/components/Quest/QuestMoreInfo.vue';
+import AppHeader from '@/components/Shared/AppHeader.vue';
 export default {
     name: "my-quest",
     computed: mapGetters(['getUser', 'getQuests']),
     components: {
-        QuestMoreInfo
+        QuestMoreInfo,
+        AppHeader
     },
     data() {
         return {

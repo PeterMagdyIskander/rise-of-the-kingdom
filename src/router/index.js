@@ -1,52 +1,70 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+import store from "../store/index.js";
+import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
-    path: '/QuestCenter',
-    name: 'QuestCenter',
-    component: () => import('../views/QuestCenterView.vue')
+    path: "/QuestCenter",
+    name: "QuestCenter",
+    component: () => import("../views/QuestCenterView.vue"),
   },
   {
-    path: '/QuestCenter/:id',
-    name: 'QuestCenterId',
-    component: () => import('../views/QuestMoreInfoView.vue')
+    path: "/QuestCenter/:id",
+    name: "QuestCenterId",
+    component: () => import("../views/QuestMoreInfoView.vue"),
   },
   {
-    path: '/Battlefield',
-    name: 'Battlefield',
-    component: () => import('../views/AttackView.vue')
+    path: "/Battlefield",
+    name: "Battlefield",
+    component: () => import("../views/BattlefieldView.vue"),
   },
   {
-    path: '/Attendance/:uid',
-    name: 'Attendance',
-    component: () => import('../views/AttendanceView.vue')
+    path: "/Attendance/:uid",
+    name: "Attendance",
+    component: () => import("../views/AttendanceView.vue"),
+    meta: { requiresAuth: true },
   },
   {
-    path: '/MyQuest',
-    name: 'MyQuest',
-    component: () => import('../views/MyQuestView.vue')
+    path: "/MyQuest",
+    name: "MyQuest",
+    component: () => import("../views/MyQuestView.vue"),
   },
   {
-    path: '/TeamRoles',
-    name: 'TeamRoles',
-    component: () => import('../views/RolesView.vue')
+    path: "/QRCode",
+    name: "QRCode",
+    component: () => import("../views/QRCodeView.vue"),
   },
   {
-    path:'/QRCode',
-    name:'QRCode',
-    component: () => import('../views/QRCodeView.vue')
-  }
-
-]
+    path: "/AddQuest",
+    name: "AddQuest",
+    component: () => import("../views/AddQuestView.vue"),
+    // meta: { requiresAuth: true },
+  },
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
-})
-export default router
+  routes,
+});
+
+// Navigation guard
+router.beforeEach((to, from, next) => {
+  const user = store.state.user; // Get the user object from the state
+  const isAuthenticated = user !== null; // Check if the user is authenticated
+  const isAdmin = user && user.role === 'ADMIN'; // Check if the user has the admin role
+
+  if (to.matched.some((record) => record.meta.requiresAuth) && (!isAuthenticated || !isAdmin))  {
+    next({
+      path: "/",
+      query: { redirect: to.fullPath },
+    });
+  } else {
+    next();
+  }
+});
+export default router;

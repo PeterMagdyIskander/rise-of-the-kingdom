@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <LoginPage v-if="getUser == null" />
-    <attendance v-else-if="getUser.role.toUpperCase() === 'ADMIN' && getUser.teamId === 'ADMIN'"></attendance>
-    <home-screen v-else></home-screen>
+    <profile-page v-else></profile-page>
   </div>
 </template>
 
@@ -10,13 +9,13 @@
 // @ is an alias to /src
 import LoginPage from '@/components/LoginPage.vue'
 import { mapGetters } from 'vuex';
-import HomeScreen from '../components/Base/HomeScreen.vue'
+import ProfilePage from '../components/Feature/ProfilePage.vue'
 import Attendance from './AttendanceView.vue';
 export default {
   name: 'HomeView',
   components: {
     LoginPage,
-    HomeScreen,
+    ProfilePage,
     Attendance
   },
   computed: mapGetters(['getUser']),

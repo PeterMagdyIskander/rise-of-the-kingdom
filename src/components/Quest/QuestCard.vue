@@ -1,7 +1,5 @@
 <template>
     <div class="card-container" @click="reroute">
-        <!-- <img src="@/assets/arrow-right.svg" alt="arrow pointing right">
-        <p>{{ title }}</p> -->
         <div class="title">
             <img src="@/assets/quest-dot.svg" alt="quest dot">
             <p>{{ title }}</p>

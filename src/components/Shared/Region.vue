@@ -1,0 +1,107 @@
+<template>
+    <div class="mainDiv" @mouseover="hover = true" @mouseleave="hover = false">
+        <div v-if="!hideRight" class="square" :style="hover ? {
+            'background-color': colorRight,
+            'filter':' brightness(100%)'
+        } : {
+            'background-color': colorRight,
+            'filter':' brightness(65%)'
+        }"></div>
+        <div v-if="!hideLeft" class="square2" :style="hover ? {
+            'background-color': colorLeft,
+            'filter':' brightness(100%)'
+        } : {
+            'background-color': colorLeft,
+            'filter':' brightness(65%)'
+        }"></div>
+        <div v-if="!hideTop" class="square3" :style="hover ? {
+            'background-color': colorTop,
+            'filter':' brightness(100%)'
+        } : {
+            'background-color': colorTop,
+            'filter':' brightness(65%)'
+        }"></div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'region',
+    data() {
+        return {
+            hover: false
+        }
+    },
+    props: {
+        hideTop: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        hideLeft: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        hideRight: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        colorTop: {
+            type: String,
+            required: true,
+            default: true,
+        },
+        colorLeft: {
+            type: String,
+            required: true,
+            default: true,
+        },
+        colorRight: {
+            type: String,
+            required: true,
+            default: true,
+        },
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.mainDiv {
+    position: relative;
+    width: 206px;
+    height: 190px;
+}
+
+.square {
+    width: 90px;
+    height: 91px;
+    background: #916647;
+    transform: skew(180deg, 210deg);
+    position: absolute;
+    top: 27px;
+    left: 1px;
+
+}
+
+.square2 {
+    width: 87px;
+    height: 92px;
+    background: #6d4e33;
+    transform: skew(180deg, 150deg);
+    position: absolute;
+    left: 91px;
+    top: 28px;
+}
+
+.square3 {
+    width: 100px;
+    height: 90px;
+    background: #d4da6c;
+    transform: rotate(150deg) translate(-40px, -16px) skew(30deg, 0deg);
+    position: absolute;
+    left: -3px;
+    top: -36px;
+}
+</style>

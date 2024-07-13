@@ -1,5 +1,5 @@
 <template>
-  <div id="sidemenu" v-if="getUser != null && getUser?.role != 'ADMIN'">
+  <div id="sidemenu" v-if="getUser != null">
     <button class="sidemenu__btn" v-on:click="navOpen = !navOpen" v-bind:class="{ active: navOpen }">
       <span class="top"></span>
       <span class="mid"></span>
@@ -14,7 +14,6 @@
             <li class="sidemenu__item" @click="closeMenu"> <router-link to="/Battlefield">Battlefield</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/MyQuest">My Quest</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/QRCode">My QR Code</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu"><router-link to="/TeamRoles">Roles</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/AddQuest">Add Quest</router-link></li>
           </ul>
         </div>
@@ -47,9 +46,9 @@ export default {
 html,
 body {
   height: 100%;
-  background-image: radial-gradient(#1f3932 1px, transparent 0);
-  background-size: 2em 2em;
-  background-color: #002225 !important;
+  background-image: radial-gradient(#A8A568 1px, transparent 0);
+    background-size: 2em 2em;
+    background-color: #042226 !important;
 
   >* {
     color: #FFF;
@@ -67,9 +66,9 @@ body {
   nav {
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(#1f3932 1px, transparent 0);
+    background-image: radial-gradient(#A8A568 1px, transparent 0);
     background-size: 2em 2em;
-    background-color: #002225 !important;
+    background-color: #042226 !important;
     position: absolute;
     top: 0;
     left: 0;

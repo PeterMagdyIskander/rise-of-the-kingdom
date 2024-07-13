@@ -1,25 +1,31 @@
 <template>
-    <div class="mainDiv" @mouseover="hover = true" @mouseleave="hover = false">
+    <div class="mainDiv" @mouseover="hover = true" @mouseleave="hover = false" @click="selectRegion">
         <div v-if="!hideRight" class="square" :style="hover ? {
             'background-color': colorRight,
-            'filter':' brightness(100%)'
+            'filter': ' brightness(100%)',
+            'border-bottom': ' 2px solid #fff',
+            'border-left': '2px solid #fff',
         } : {
             'background-color': colorRight,
-            'filter':' brightness(65%)'
+            'filter': ' brightness(65%)'
         }"></div>
         <div v-if="!hideLeft" class="square2" :style="hover ? {
             'background-color': colorLeft,
-            'filter':' brightness(100%)'
+            'filter': ' brightness(100%)',
+            'border-bottom': ' 2px solid #fff',
+            'border-right': '2px solid #fff',
         } : {
             'background-color': colorLeft,
-            'filter':' brightness(65%)'
+            'filter': ' brightness(65%)'
         }"></div>
         <div v-if="!hideTop" class="square3" :style="hover ? {
             'background-color': colorTop,
-            'filter':' brightness(100%)'
+            'filter': ' brightness(100%)',
+            'border-bottom': ' 2px solid #fff',
+            'border-left': '2px solid #fff',
         } : {
             'background-color': colorTop,
-            'filter':' brightness(65%)'
+            'filter': ' brightness(65%)'
         }"></div>
     </div>
 </template>
@@ -63,6 +69,14 @@ export default {
             required: true,
             default: true,
         },
+        regionInfo: {
+            type: Object,
+        }
+    },
+    methods:{
+        selectRegion(){
+            this.$emit('clickRegion',this.regionInfo)
+        }
     }
 }
 </script>

@@ -26,7 +26,7 @@ export default {
 .header-container {
     width: 100%;
     height: 150px;
-    background-color: #006e77;
+    background-color: #0A6E78;
     display: flex;
     flex-direction: column;
     align-items: center;

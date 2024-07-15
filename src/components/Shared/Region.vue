@@ -84,34 +84,34 @@ export default {
 <style lang="scss" scoped>
 .mainDiv {
     position: relative;
-    width: 206px;
-    height: 190px;
+    width: 103px;
+    height: 95px;
 }
 
 .square {
-    width: 90px;
-    height: 91px;
+    width: 60px;
+    height: 70px;
     background: #916647;
     transform: skew(180deg, 210deg);
     position: absolute;
-    top: 27px;
-    left: 1px;
+    top: 4px;
+    left: 15px;
 
 }
 
 .square2 {
-    width: 87px;
-    height: 92px;
+    width: 60px;
+    height: 70px;
     background: #6d4e33;
     transform: skew(180deg, 150deg);
     position: absolute;
-    left: 91px;
-    top: 28px;
+    left: 75px;
+    top: 4px;
 }
 
 .square3 {
-    width: 100px;
-    height: 90px;
+    width: 70px;
+    height: 60px;
     background: #d4da6c;
     transform: rotate(150deg) translate(-40px, -16px) skew(30deg, 0deg);
     position: absolute;

@@ -149,7 +149,7 @@ export default {
         height: 50px;
         border: 2px solid #17182d;
         color: #E5E5E5;
-        background-color: #252a52;
+        background-color: #0A6E78;
         border-radius: 6px;
         padding-left: 10px;
         font-family: "ptmono";

@@ -65,7 +65,7 @@ p {
 
     &-details {
         width: 100%;
-        background-color: #162041;
+        background-color: #0A6E78;
         padding: 35px;
         display: flex;
         flex-direction: column;

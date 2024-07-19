@@ -50,7 +50,7 @@ export default {
 html,
 body {
   height: 100%;
-  background-image: radial-gradient(#A8A568 1px, transparent 0);
+  background-image: radial-gradient(rgb(168 165 104 / 30%) 1px, transparent 0);
     background-size: 2em 2em;
     background-color: #042226 !important;
 

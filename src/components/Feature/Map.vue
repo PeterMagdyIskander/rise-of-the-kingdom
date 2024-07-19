@@ -85,38 +85,38 @@ export default {
 
     .love {
         position: absolute;
-        top: 140px;
-        left: 38px;
+        top: 15vh;
+        left: -41vw;
     }
 
     .mercy {
         position: absolute;
-        top: 155px;
-        left: 194px;
+        top: 16vh;
+        left: -12vw;
     }
 
     .compassion {
         position: absolute;
-        top: 254px;
-        left: 224px;
+        top: 26vh;
+        left: -2vw;
     }
 
     .peace {
         position: absolute;
-        top: 291px;
-        left: 102px;
+        top: 30vh;
+        left: -30vw;
     }
 
     .holy {
         position: absolute;
-        top: 427px;
-        left: 15px;
+        top: 44vh;
+        left: -46vw;
     }
 
     .joy {
         position: absolute;
-        top: 398px;
-        left: 174px;
+        top: 41vh;
+        left: -14vw;
     }
 }
 </style>

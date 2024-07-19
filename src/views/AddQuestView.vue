@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header :title="'Rise Of The Kingdom'" :subtitle="'Add Quest'"></app-header>
+        <app-header  :title="'rise of the kingdom'" :subtitle="'Add Quest'"></app-header>
 
         <form class="home-container" @submit.prevent="handleSubmit">
             <div class="input-container">
@@ -69,7 +69,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { db } from '@/firebase';
 import { collection, getFirestore, onSnapshot, doc, updateDoc, increment,addDoc } from 'firebase/firestore';
 import AppHeader from '@/components/Shared/AppHeader.vue';
 

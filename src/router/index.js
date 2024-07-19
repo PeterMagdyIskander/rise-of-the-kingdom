@@ -51,6 +51,24 @@ const routes = [
     component: () => import("../views/AddQuestView.vue"),
     // meta: { requiresAuth: true },
   },
+  {
+    path: "/AddTeam",
+    name: "AddTeam",
+    component: () => import("../views/AddTeamView.vue"),
+    // meta: { requiresAuth: true },
+  },
+  {
+    path: "/AssignPlayers",
+    name: "AssignPlayers",
+    component: () => import("../views/AssignPlayersToTeamsView.vue"),
+    // meta: { requiresAuth: true },
+  },
+  {
+    path: "/Leaderboard",
+    name: "Leaderboard",
+    component: () => import("../views/LeaderboardView.vue"),
+    // meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({

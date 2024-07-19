@@ -1,6 +1,6 @@
 <template>
     <div class="battlefield">
-        <app-header :title="'Rise Of The Kingdom'" :subtitle="'Battlefield'"></app-header>
+        <app-header  :title="'rise of the kingdom'" :subtitle="'Battlefield'"></app-header>
         <Map @selectRegion="select"></Map>
         <RegionMoreInfo v-if="regionSelected" :regionInfo="regionSelected"></RegionMoreInfo>
     </div>

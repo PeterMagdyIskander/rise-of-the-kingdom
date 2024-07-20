@@ -6,18 +6,21 @@ export default createStore({
   state: {
     user: null,
     quests: [],
+    teamData: null,
     loading: false,
     failed: false,
   },
   getters: {
     getUser: (state) => state.user,
     getQuests: (state) => state.quests,
+    getTeamData: (state) => state.teamData,
     getLoading: (state) => state.loading,
     getFailed: (state) => state.failed
   },
   mutations: {
     setUser: (state, user) => (state.user = user),
     setQuests: (state, quests) => (state.quests = quests),
+    setTeamData: (state, teamData) => (state.teamData = teamData),
     setLoading: (state, loading) => (state.loading = loading),
     setFailed: (state, failed) => (state.failed = failed)
   },
@@ -42,6 +45,7 @@ export default createStore({
                 uid: res.user.uid,
                 name: res.user.displayName,
                 assignedQuestId: "",
+                assignedRegionId: "",
                 isTeamLead: false,
                 email: res.user.email
               }
@@ -81,7 +85,15 @@ export default createStore({
         const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         commit('setQuests', data)
       })
-    }
+    },
+    setTeamData({ commit }, teamId) {
+      const firestore = getFirestore();
+      const teamCollectionReference = collection(firestore, 'teams');
+      const myTeam = doc(teamCollectionReference, teamId)
+      onSnapshot(myTeam, snapshot => {
+        commit('setTeamData', { ...snapshot.data() })
+      })
+    },
   },
   modules: {
   }

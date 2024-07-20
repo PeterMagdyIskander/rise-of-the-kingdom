@@ -18,8 +18,8 @@ export default {
     ProfilePage,
     Attendance
   },
-  computed: mapGetters(['getUser']),
- 
+  computed: mapGetters(['getUser', 'getTeamData']),
+
 }
 </script>
 <style lang="scss" scoped>

@@ -3,11 +3,11 @@
     </div>
 </template>
 <script>
-import { collection, getFirestore, getDoc, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getFirestore, getDoc, doc, updateDoc, increment, arrayUnion } from 'firebase/firestore';
 
 import { mapActions, mapGetters } from 'vuex';
 export default {
-    name: "quest-submission-view",
+    name: "region-submission-view",
     computed: mapGetters(['getUser', 'getQuests', 'getLoading', 'getFailed', mapActions]),
     mounted() {
         const uid = this.$route.path.split('/')[2]
@@ -27,18 +27,15 @@ export default {
                     let user = {
                         ...data
                     }
-                    console.log(user)
-                    let quest = this.getQuests.filter(quest => quest.id === user.assignedQuestId)[0];
                     const teamDoc = doc(teamCollectionReference, user.teamId);
 
                     updateDoc(userDoc, {
-                        assignedQuestId: "",
-                        gold: increment(quest.reward),
+                        assignedRegionId: "",
                     })
                     updateDoc(teamDoc, {
-                        gold: increment(quest.reward),
+                        conqueredRegions: arrayUnion(user.assignedRegionId),
                     })
-                    alert("Quest points reflected successfuly!")
+                    alert("Region conquered successfuly!")
                 } else {
                     console.log("No such document!");
                 }

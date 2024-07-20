@@ -9,12 +9,19 @@
             <div class="more-info">
                 <div class="more-info-info">
                     <p class="title">Team's HP</p>
-                    <p class="info">{{ myTeamData.gold }}</p>
+                    <div class="more-info-info-hp">
+                        <p class="info">{{ getTeamData?.gold }}</p>
+                        <img src="@/assets/humanityPoints-icon.svg" alt="">
+                    </div>
+
                 </div>
                 <div class="more-info-separator"></div>
                 <div class="more-info-info">
                     <p class="title">Your HP</p>
-                    <p class="info">{{ getUser.gold }}</p>
+                    <div class="more-info-info-hp">
+                        <p class="info">{{ getUser.gold }}</p>
+                        <img src="@/assets/humanityPoints-icon.svg" alt="">
+                    </div>
                 </div>
             </div>
             <div class="ship-container">
@@ -26,7 +33,23 @@
                     alt="kalos planet">
                 <img class="planet-img" v-if="getUser.teamId === 'Astro'" src="@/assets/astro-planet-ship.svg"
                     alt="astro planet">
+
                 <h1 class="planet-title" :class="getUser.teamId">{{ getUser.teamId }}</h1>
+                <div class="health-section">
+                    <div class="health-section-container" :style="{
+                        'border': `2px solid ${getColor()}`,
+                        'background-color': getBEColor(),
+                    }">
+                        <div class="health-section-container-health" :style="{
+                            width: (getTeamData?.conqueredRegions.length / 6) * 100 + '%',
+                            'border': `2px solid ${getColor()}`,
+                            'background-color': getColor(),
+                        }">
+                        </div>
+                    </div>
+                    <p class="region-count">{{ `${getTeamData?.conqueredRegions.length} / 6` }}</p>
+                </div>
+
             </div>
             <div class="navigation-section">
                 <div class="navigation-section-item" @click="navigateTo('/Battlefield')">
@@ -50,33 +73,46 @@
 <script>
 import AppHeader from '../Shared/AppHeader.vue';
 
-import { collection, getFirestore, onSnapshot, doc } from 'firebase/firestore';
 import { mapGetters } from 'vuex';
 export default {
     name: "profile-page",
     components: { AppHeader },
-    computed: mapGetters(['getUser']),
-    data() {
-        return {
-            myTeamData: {},
+    computed: mapGetters(['getUser', 'getTeamData']),
+    methods: {
+        getColor() {
+            switch (this.getUser.teamId) {
+                case 'Kalos':
+                    return '#B62E4D'
+                case 'Lumos':
+                    return '#FEC802'
+                case 'Dynamis':
+                    return '#BC2FFF'
+                case 'Astro':
+                    return '#56E0FF'
+            }
+        },
+        getBEColor() {
+            switch (this.getUser.teamId) {
+                case 'Kalos':
+                    return '#44111C'
+                case 'Lumos':
+                    return '#5F4B02'
+                case 'Dynamis':
+                    return '#4C1866'
+                case 'Astro':
+                    return '#162041'
+            }
         }
-    },
-    mounted() {
-        const firestore = getFirestore();
-        const teamCollectionReference = collection(firestore, 'teams');
-        const myTeam = doc(teamCollectionReference, this.getUser.teamId)
-        onSnapshot(myTeam, snapshot => {
-            this.myTeamData = { ...snapshot.data() };
-        })
     }
 }
 </script>
 
 <style lang="scss" scoped>
-p{
+p {
     padding: 0;
     margin: 0;
 }
+
 .header-container {
     width: 100%;
     height: 150px;
@@ -85,6 +121,7 @@ p{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     & .logo {
         font-family: 'pressstart2p';
         color: #F7C970;
@@ -150,10 +187,43 @@ p{
             color: #E5E5E5;
         }
 
+        &-hp {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+
+            & .info {
+                font-family: 'pressstart2p';
+                font-size: 17px;
+                color: #E5E5E5;
+            }
+
+            img {
+                width: 24px;
+            }
+        }
+
         & .info {
             font-family: 'pressstart2p';
             font-size: 17px;
             color: #E5E5E5;
+        }
+    }
+}
+
+.health-section {
+    width: 80%;
+
+    &-container {
+        width: 100%;
+        height: 30px;
+        border-radius: 6px;
+        padding: 2px;
+        margin: 15px auto;
+
+        &-health {
+            height: 100%;
+            border-radius: 6px;
         }
     }
 }
@@ -164,7 +234,6 @@ p{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 30px;
     background-color: #000000;
     border-radius: 12px;
     padding: 15px 0;
@@ -174,23 +243,23 @@ p{
         font-family: 'pressstart2p';
 
         &.Dynamis {
-            color: #b56ba1;
-            text-shadow: 0 3px #222951;
+            color: #BC2FFF;
+            text-shadow: 0 3px #4C1866;
         }
 
         &.Lumos {
-            color: #ffb11c;
-            text-shadow: 3px 3px #e85629;
+            color: #FEC802;
+            text-shadow: 3px 3px #5F4B02;
         }
 
         &.Kalos {
-            color: #6aae64;
-            text-shadow: 0 3px #125b85;
+            color: #B62E4D;
+            text-shadow: 0 3px #44111C;
         }
 
         &.Astro {
-            color: #327cc1;
-            text-shadow: 0 3px #4a3584;
+            color: #56E0FF;
+            text-shadow: 0 3px #162041;
         }
     }
 }
@@ -219,5 +288,12 @@ p{
 
 .levelup-img {
     width: 70px;
+}
+
+.region-count {
+    font-family: 'pressstart2p';
+    font-size: 18px;
+    color: #E5E5E5;
+    align-self: flex-start;
 }
 </style>

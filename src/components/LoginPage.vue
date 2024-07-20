@@ -12,17 +12,18 @@ export default {
   name: "LoginPage",
   computed: mapGetters(['getUser', 'getQuests', 'getLoading', 'getFailed', mapActions]),
   methods: {
-    ...mapActions(['login', 'setQuests']),
+    ...mapActions(['login', 'setQuests', 'setTeamData']),
     async signIn() {
       if (!this.getLoading) {
         const redirect = this.$route.query.redirect || '/';
         try {
           await this.login();
-          this.$router.push(redirect);
+          await this.setQuests();
+          await this.setTeamData(this.getUser.teamId)
         } catch (error) {
           console.error('Login failed', error);
         } finally {
-          this.setQuests();
+          this.$router.push(redirect);
         }
       }
     }

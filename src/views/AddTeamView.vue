@@ -47,7 +47,8 @@ export default {
                 const db = getFirestore();
                 const teamRef = doc(db, 'teams', this.form.name);
                 await setDoc(teamRef, {
-                    gold: 0
+                    gold: 0,
+                    conqueredRegions:[]
                 });
                 alert('Team added successfully!');
                 this.resetForm();

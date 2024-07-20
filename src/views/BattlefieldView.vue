@@ -1,8 +1,9 @@
 <template>
     <div class="battlefield">
-        <app-header  :title="'rise of the kingdom'" :subtitle="'Battlefield'"></app-header>
+        <app-header :title="'rise of the kingdom'" :subtitle="'Battlefield'"></app-header>
         <Map @selectRegion="select"></Map>
-        <RegionMoreInfo v-if="regionSelected" :regionInfo="regionSelected"></RegionMoreInfo>
+        <RegionMoreInfo v-if="regionSelected" :regionInfo="regionSelected" @close="regionSelected = null">
+        </RegionMoreInfo>
     </div>
 </template>
 
@@ -30,19 +31,19 @@ export default {
     },
     mounted() { },
     methods: {
-        select(regionInfo){
-            this.regionSelected=regionInfo
+        select(regionInfo) {
+            this.regionSelected = regionInfo
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-.battlefield{
+.battlefield {
     height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 </style>

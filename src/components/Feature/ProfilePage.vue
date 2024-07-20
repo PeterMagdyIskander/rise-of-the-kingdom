@@ -73,6 +73,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p{
+    padding: 0;
+    margin: 0;
+}
 .header-container {
     width: 100%;
     height: 150px;

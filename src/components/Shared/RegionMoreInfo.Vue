@@ -24,6 +24,10 @@ export default {
         regionInfo: {
             type: Object,
         }
+    }, methods: {
+        decline(){
+            this.$emit('close')
+        }
     }
 
 }
@@ -43,32 +47,38 @@ export default {
     padding: 0 15px;
     position: absolute;
     bottom: 0;
-    border-radius: 5px 5px 0  0 ;
+    border-radius: 5px 5px 0 0;
     border-top: 5px solid #fff;
     border-left: 5px solid #fff;
     border-right: 5px solid #fff;
+
     .title {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: 30px;
-        .main{
+
+        .main {
             font-family: 'pressstart2p';
         }
+
         .humanity-points {
             display: flex;
             align-items: center;
             column-gap: 5px;
-            p{
+
+            p {
                 font-size: 23px;
             }
         }
     }
-    .quest{
-        &-title{
+
+    .quest {
+        &-title {
             font-weight: bold;
         }
     }
+
     .button-container {
         width: 100%;
         display: flex;
@@ -94,7 +104,7 @@ export default {
             box-shadow: 0px -3px 6px #0000005C;
             border: 3px solid #FFFFFF;
             border-radius: 6px;
-            
+
             font-size: 13px;
         }
     }

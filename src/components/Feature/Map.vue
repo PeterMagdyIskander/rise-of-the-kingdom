@@ -82,41 +82,44 @@ export default {
 <style lang="scss" scoped>
 .map {
     position: relative;
+    width: 80%;
+    height: 80%;
+    margin-top: 50px;
 
     .love {
         position: absolute;
-        top: 15vh;
-        left: -41vw;
+        top: 100px;
+        left: 0px;
     }
 
     .mercy {
         position: absolute;
-        top: 16vh;
-        left: -12vw;
+        top: 106px;
+        left: 110px;
     }
 
     .compassion {
         position: absolute;
-        top: 26vh;
-        left: -2vw;
+        top: 167px;
+        left: 190px;
     }
 
     .peace {
         position: absolute;
-        top: 30vh;
-        left: -30vw;
+        top: 193px;
+        left: 74px;
     }
 
     .holy {
         position: absolute;
-        top: 44vh;
-        left: -46vw;
+        top: 294px;
+        left: 13px;
     }
 
     .joy {
         position: absolute;
-        top: 41vh;
-        left: -14vw;
+        top: 265px;
+        left: 127px;
     }
 }
 </style>

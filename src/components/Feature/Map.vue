@@ -14,18 +14,10 @@
             </div>
             <div class="hp-count">{{ getTeamData?.gold }}</div>
         </div>
-        <region :color-left="'#43260f'" :color-right="'#5d3618'" :color-top="'#7c502b'" class="love"
-            :region-info="regions[0]" @clickRegion="selectRegion"></region>
-        <region :color-left="'#422a2a'" :color-right="'#523132'" :color-top="'#633c3d'" class="mercy"
-            :region-info="regions[1]" @clickRegion="selectRegion"></region>
-        <region :color-left="'#192a34'" :color-right="'#253c4a'" :color-top="'#3d5a6c'" class="compassion"
-            :region-info="regions[2]" @clickRegion="selectRegion"></region>
-        <region :color-left="'#34213a'" :color-right="'#492f51'" :color-top="'#60406b'" class="peace"
-            :region-info="regions[3]" @clickRegion="selectRegion"></region>
-        <region :color-left="'#3b3c22'" :color-right="'#5b5d35'" :color-top="'#686d44'" class="holy"
-            :region-info="regions[4]" @clickRegion="selectRegion"></region>
-        <region :color-left="'#233c37'" :color-right="'#2d5149'" :color-top="'#3b6d62'" class="joy"
-            :region-info="regions[5]" @clickRegion="selectRegion"></region>
+        <region v-for="region in regions" :key="region.name" :color-left="region.colorLeft"
+            :color-right="region.colorRight" :color-top="region.colorTop" :class="region.name.toLowerCase()"
+            :region-info="region" @clickRegion="selectRegion"></region>
+
     </div>
 </template>
 
@@ -45,49 +37,29 @@ export default {
     },
     data() {
         return {
-            regions: [
-                {
-                    "name": "Aria",
-                    "gold": 85,
-                    "quest": "Rescue the Lost Villagers"
-                },
-                {
-                    "name": "Bryn",
-                    "gold": 92,
-                    "quest": "Retrieve the Sacred Artifact"
-                },
-                {
-                    "name": "Cassian",
-                    "gold": 78,
-                    "quest": "Defeat the Shadow Beast"
-                },
-                {
-                    "name": "Dara",
-                    "gold": 95,
-                    "quest": "Protect the Enchanted Forest"
-                },
-                {
-                    "name": "Elys",
-                    "gold": 88,
-                    "quest": "Find the Ancient Library"
-                },
-                {
-                    "name": "Finn",
-                    "gold": 83,
-                    "quest": "Edy faree2 tany humanity points ad points el zone deeh mareteen. "
-                },
-                {
-                    "name": "Galen",
-                    "gold": 90,
-                    "quest": "Cure the Plague"
-                }
-            ]
+            regions: []
         }
     },
-    mounted() { },
+    mounted() {
+        //              USE THIS TO UPLOAD REGIONS
+        // const db = getFirestore();
+        // const batch = writeBatch(db);
+        // const regionsRef = collection(db, "regions");
+        // this.regions.forEach(item => {
+        //     const docRef = doc(regionsRef)
+        //     batch.set(docRef, item);
+        // });
+        // await batch.commit();
+
+        const firestore = getFirestore();
+        const questsCollectionReference = collection(firestore, 'regions');
+        onSnapshot(questsCollectionReference, snapshot => {
+            this.regions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        })
+    },
     methods: {
         selectRegion(region) {
-            if (this.getUser.assignedRegionId === region.name || this.getUser.assignedRegionId === '')
+            if (this.getUser.assignedRegionId === region.id || this.getUser.assignedRegionId === '')
                 this.$emit('selectRegion', region)
 
         },
@@ -146,6 +118,7 @@ export default {
     align-items: center;
     height: 48px;
     position: relative;
+
     .hp-circle {
         width: 48px;
         height: 48px;
@@ -154,7 +127,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         position: absolute;
         left: -37px;
         z-index: 2;

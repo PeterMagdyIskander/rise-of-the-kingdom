@@ -4,12 +4,13 @@ import { collection, doc, getFirestore, onSnapshot, setDoc } from 'firebase/fire
 
 function areCredentialsValid(credentials) {
   if (!credentials) return false;
+  if(credentials.user.role!=="ADMIN")return false
   const { token, expiry } = credentials;
   const now = new Date().getTime();
   return token && expiry && now < expiry;
 }
 
-function saveCredentials(credentials) {
+export function saveCredentials(credentials) {
   localStorage.setItem('userCredentials', JSON.stringify(credentials));
 }
 
@@ -69,6 +70,7 @@ export default createStore({
                 uid: res.user.uid,
                 name: res.user.displayName,
                 assignedQuestId: "",
+                assignedRegionId: "",
                 isTeamLead: false,
                 email: res.user.email
               }

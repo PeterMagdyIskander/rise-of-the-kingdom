@@ -18,6 +18,7 @@ export default {
             const firestore = getFirestore();
             const userCollectionReference = collection(firestore, 'users');
             const teamCollectionReference = collection(firestore, 'teams');
+            const regionCollectionReference = collection(firestore, 'regions');
             const userDoc = doc(userCollectionReference, uid);
 
             try {
@@ -28,12 +29,16 @@ export default {
                         ...data
                     }
                     const teamDoc = doc(teamCollectionReference, user.teamId);
+                    const regionDoc = doc(regionCollectionReference, user.assignedRegionId);
 
                     updateDoc(userDoc, {
                         assignedRegionId: "",
                     })
                     updateDoc(teamDoc, {
                         conqueredRegions: arrayUnion(user.assignedRegionId),
+                    })
+                    updateDoc(regionDoc, {
+                        conquerer: arrayUnion(user.teamId),
                     })
                     alert("Region conquered successfuly!")
                 } else {

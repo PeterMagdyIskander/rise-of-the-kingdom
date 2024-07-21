@@ -7,15 +7,15 @@
                 <p>{{ regionInfo.gold }}</p>
             </div>
         </div>
-        <div class="quest">
+        <div class="quest" v-if="getUser.assignedRegionId !== regionInfo.id">
             <p class="quest-title">Quest</p>
             <p>{{ regionInfo.quest }}</p>
         </div>
-
-        <div class="button-container" v-if="getUser.assignedRegionId === '' && getUser.isTeamLead">
+        <div class="button-container" v-if="getUser.assignedRegionId === ''&& getUser.isTeamLead ">
             <button @click="accept">ENTER</button>
         </div>
-        <div class="quest-submission" v-else-if="getUser.assignedRegionId === regionInfo.name">
+        
+        <div class="quest-submission" v-else-if="getUser.assignedRegionId === regionInfo.id">
             <div class="quest">
                 <p class="quest-title">Quest</p>
                 <p>{{ regionInfo.quest }}</p>
@@ -53,7 +53,7 @@ export default {
                 const firestore = getFirestore();
                 const userCollectionReference = collection(firestore, 'users');
                 const userDoc = doc(userCollectionReference, this.getUser.uid);
-                updateDoc(userDoc, { assignedRegionId: this.regionInfo.name })
+                updateDoc(userDoc, { assignedRegionId: this.regionInfo.id })
                 alert("Land quest started successfuly!")
             } else {
                 alert("Your team doesn't have enough humanity points!")
@@ -75,12 +75,12 @@ export default {
         }
     },
     mounted() {
-        if (this.getUser.assignedRegionId === this.regionInfo.name) {
+        if (this.getUser.assignedRegionId === this.regionInfo.id) {
             this.generateQRCode()
         }
     },
     updated() {
-        if (this.getUser.assignedRegionId === this.regionInfo.name) {
+        if (this.getUser.assignedRegionId === this.regionInfo.id) {
             this.generateQRCode()
         }
     }

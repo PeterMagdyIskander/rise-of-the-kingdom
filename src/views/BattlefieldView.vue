@@ -47,6 +47,7 @@ export default {
     methods: {
         select(regionInfo) {
             this.regionSelected = regionInfo
+            alert('click')
         }, navigateTo(to) {
             this.$router.push(to);
         }

@@ -7,26 +7,23 @@
                 <p>{{ regionInfo.gold }}</p>
             </div>
         </div>
-        <div v-if="getUser.assignedRegionId === ''">
-            <div class="quest">
-                <p class="quest-title">Quest</p>
-                <p>{{ regionInfo.quest }}</p>
-            </div>
-            <div class="button-container">
-                <button @click="accept">ENTER</button>
-                <button class="reject" @click="decline">DISMISS</button>
-            </div>
+        <div class="quest">
+            <p class="quest-title">Quest</p>
+            <p>{{ regionInfo.quest }}</p>
+        </div>
+
+        <div class="button-container" v-if="getUser.assignedRegionId === '' && getUser.isTeamLead">
+            <button @click="accept">ENTER</button>
         </div>
         <div class="quest-submission" v-else-if="getUser.assignedRegionId === regionInfo.name">
             <div class="quest">
                 <p class="quest-title">Quest</p>
                 <p>{{ regionInfo.quest }}</p>
-                <button class="done" @click="decline">Done</button>
             </div>
             <div id="qrcode"></div>
         </div>
 
-
+        <button class="done" @click="decline">Close</button>
     </div>
 </template>
 <script>
@@ -114,7 +111,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 30px;
+        margin-top: 10px;
 
         .main {
             font-family: 'pressstart2p';
@@ -156,16 +153,6 @@ export default {
             font-size: 13px;
             font-family: 'pressstart2p';
         }
-
-        .reject {
-            background-color: #1C464E;
-            box-shadow: 0px -3px 6px #0000005C;
-            border: 3px solid #FFFFFF;
-            border-radius: 6px;
-
-            font-family: 'pressstart2p';
-            font-size: 13px;
-        }
     }
 }
 
@@ -180,10 +167,13 @@ export default {
     border: 3px solid #FFFFFF;
     color: #FFFFFF;
     border-radius: 6px;
-    padding: 5px 10px;
+    padding:5px;
     font-size: 16px;
 
     font-family: 'pressstart2p';
     margin-top: 10px;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
 }
 </style>

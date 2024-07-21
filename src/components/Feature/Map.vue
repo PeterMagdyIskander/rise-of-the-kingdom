@@ -99,7 +99,7 @@ export default {
 .map {
     position: relative;
     width: 80%;
-    height: 80%;
+    height: 60%;
     margin-top: 30px;
     display: flex;
     justify-content: center;

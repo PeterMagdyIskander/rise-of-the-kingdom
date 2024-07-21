@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <img class="levelup-img" src="@/assets/levelup-icon.svg" alt="dynamis planet">
+            <img class="levelup-img" src="@/assets/levelup-icon.svg" alt="logo icon">
         </div>
     </div>
 </template>
@@ -102,6 +102,8 @@ export default {
                 case 'Astro':
                     return '#162041'
             }
+        }, navigateTo(to) {
+            this.$router.push(to);
         }
     }
 }

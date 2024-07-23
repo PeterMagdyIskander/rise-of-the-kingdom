@@ -42,16 +42,16 @@
                 <div class="difficulty">
                     <div class="difficulty-item" @click="form.category = 'physical'"
                         :class="{ 'selected': form.category == 'physical' }">
-                        <img src="@/assets/attack-icon.svg" alt="attack-icon">
+                        <img src="@/assets/physical-icon.svg" alt="attack-icon">
                     </div>
                     <div class="difficulty-item" @click="form.category = 'social'"
                         :class="{ 'selected': form.category == 'social' }">
-                        <img src="@/assets/defend-icon.svg" alt="quest-center-icon">
+                        <img src="@/assets/social-icon.svg" alt="quest-center-icon">
 
                     </div>
                     <div class="difficulty-item" @click="form.category = 'spiritual'"
                         :class="{ 'selected': form.category == 'spiritual' }">
-                        <img src="@/assets/heal-icon.svg" alt="my-quest-icon">
+                        <img src="@/assets/spiritual-icon.svg" alt="my-quest-icon">
                     </div>
                 </div>
             </div>
@@ -169,6 +169,9 @@ export default {
         &-item {
             padding: 13px;
             cursor: pointer;
+            img{
+                width:68px;
+            }
         }
 
         & .selected {

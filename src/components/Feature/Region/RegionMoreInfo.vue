@@ -9,7 +9,7 @@
         </div>
 
         <div class="" v-if="getTeamData.conqueredRegions.includes(regionInfo.id)">
-
+            <ConquererCard v-for="(team,index) in regionInfo.conquerer" :title="team" :order="index+1"></ConquererCard>
         </div>
         <div v-else>
             <div class="quest" v-if="getUser.assignedRegionId !== regionInfo.id">
@@ -34,11 +34,16 @@
 </template>
 <script>
 
-import { collection, doc, getFirestore, updateDoc, arrayUnion } from 'firebase/firestore';
+import { collection, doc, getFirestore, updateDoc, arrayUnion, orderBy } from 'firebase/firestore';
 import { mapGetters, mapActions } from 'vuex';
 import QRCode from 'qrcode';
+import ConquererCard from './ConquererCard.vue';
 export default {
     name: 'region-more-info',
+    components:{
+        
+        ConquererCard
+    },
     props: {
         regionInfo: {
             type: Object,
@@ -174,10 +179,9 @@ export default {
     color: #FFFFFF;
     border-radius: 6px;
     padding: 5px;
-    font-size: 16px;
+    font-size: 10px;
 
     font-family: 'pressstart2p';
-    margin-top: 10px;
     position: absolute;
     bottom: 5px;
     left: 5px;

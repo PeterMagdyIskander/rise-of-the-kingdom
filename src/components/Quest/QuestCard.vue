@@ -50,7 +50,7 @@ p {
     align-items: center;
     height: 62px;
     cursor: pointer;
-    background-color: #162041;
+    background-color: #0A6E78;
     margin: 18px 0;
 
     & .title {

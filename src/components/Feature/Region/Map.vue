@@ -110,6 +110,7 @@ export default {
         position: absolute;
         top: 265px;
         left: 127px;
+        z-index: 1;
     }
 }
 

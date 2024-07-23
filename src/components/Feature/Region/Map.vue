@@ -26,7 +26,7 @@
 import { mapGetters } from 'vuex';
 import { collection, getFirestore, onSnapshot, doc, updateDoc, increment } from 'firebase/firestore';
 
-import Region from '@/components/Shared/Region.vue'
+import Region from '@/components/Feature/Region/Region.vue'
 export default {
     name: "map",
     computed: {

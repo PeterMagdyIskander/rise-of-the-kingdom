@@ -7,20 +7,26 @@
                 <p>{{ regionInfo.gold }}</p>
             </div>
         </div>
-        <div class="quest" v-if="getUser.assignedRegionId !== regionInfo.id">
-            <p class="quest-title">Quest</p>
-            <p>{{ regionInfo.quest }}</p>
+
+        <div class="" v-if="getTeamData.conqueredRegions.includes(regionInfo.id)">
+
         </div>
-        <div class="button-container" v-if="getUser.assignedRegionId === ''&& getUser.isTeamLead ">
-            <button @click="accept">ENTER</button>
-        </div>
-        
-        <div class="quest-submission" v-else-if="getUser.assignedRegionId === regionInfo.id">
-            <div class="quest">
+        <div v-else>
+            <div class="quest" v-if="getUser.assignedRegionId !== regionInfo.id">
                 <p class="quest-title">Quest</p>
                 <p>{{ regionInfo.quest }}</p>
             </div>
-            <div id="qrcode"></div>
+            <div class="button-container" v-if="getUser.assignedRegionId === '' && getUser.isTeamLead">
+                <button @click="accept">ENTER</button>
+            </div>
+
+            <div class="quest-submission" v-else-if="getUser.assignedRegionId === regionInfo.id">
+                <div class="quest">
+                    <p class="quest-title">Quest</p>
+                    <p>{{ regionInfo.quest }}</p>
+                </div>
+                <div id="qrcode"></div>
+            </div>
         </div>
 
         <button class="done" @click="decline">Close</button>
@@ -167,7 +173,7 @@ export default {
     border: 3px solid #FFFFFF;
     color: #FFFFFF;
     border-radius: 6px;
-    padding:5px;
+    padding: 5px;
     font-size: 16px;
 
     font-family: 'pressstart2p';

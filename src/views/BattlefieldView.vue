@@ -24,9 +24,9 @@
 <script>
 import { mapGetters } from 'vuex';
 import AppHeader from '@/components/Shared/AppHeader.vue';
-import Region from '@/components/Shared/Region.vue'
-import RegionMoreInfo from '@/components/Shared/RegionMoreInfo.vue'
-import Map from '@/components/Feature/Map.vue'
+import Region from '@/components/Feature/Region/Region.vue'
+import RegionMoreInfo from '@/components/Feature/Region/RegionMoreInfo.vue'
+import Map from '@/components/Feature/Region/Map.vue'
 export default {
     name: "battlefield-view",
     computed: {
@@ -47,7 +47,6 @@ export default {
     methods: {
         select(regionInfo) {
             this.regionSelected = regionInfo
-            alert('click')
         }, navigateTo(to) {
             this.$router.push(to);
         }

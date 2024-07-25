@@ -12,7 +12,7 @@
                 </svg>
 
             </div>
-            <div class="hp-count">{{ getTeamData?.gold }}</div>
+            <div class="hp-count">{{ getTeamData?.humanityPoints }}</div>
         </div>
         <region v-for="region in regions" :key="region.name" :color-left="region.colorLeft"
             :color-right="region.colorRight" :color-top="region.colorTop" :class="region.name.toLowerCase()"
@@ -24,7 +24,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { collection, getFirestore, onSnapshot, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, doc, updateDoc, increment ,writeBatch} from 'firebase/firestore';
 
 import Region from '@/components/Feature/Region/Region.vue'
 export default {
@@ -37,7 +37,57 @@ export default {
     },
     data() {
         return {
-            regions: []
+            regions: [],
+            // regions: [{
+            //     colorLeft: "#233c37",
+            //     colorRight: "#2d5149",
+            //     colorTop: "#3b6d62",
+            //     conquerer: [],
+            //     gold: 83,
+            //     name: "Joy",
+            //     quest: "Edy faree2 tany humanity points ad points el zone deeh mareteen. "
+            // }, {
+            //     colorLeft: "#43260f",
+            //     colorRight: "#5d3618",
+            //     colorTop: "#7c502b",
+            //     conquerer: [],
+            //     gold: 85,
+            //     name: "Love",
+            //     quest: "Rescue the Lost Villagers"
+            // }, {
+            //     colorLeft: "#422a2a",
+            //     colorRight: "#523132",
+            //     colorTop: "#633c3d",
+            //     conquerer: [],
+            //     gold: 92,
+            //     name: "Mercy",
+            //     quest: "Retrieve the Sacred Artifact"
+            // }, {
+            //     colorLeft: "#192a34",
+            //     colorRight: "#253c4a",
+            //     colorTop: "#3d5a6c",
+            //     conquerer: [],
+            //     gold: 78,
+            //     name: "Compassion",
+            //     quest: "Defeat the Shadow Beast"
+            // }, {
+            //     colorLeft: "#34213a",
+            //     colorRight: "#492f51",
+            //     colorTop: "#60406b",
+            //     conquerer: [],
+            //     gold: 95,
+            //     name: "Peace",
+            //     quest: "Protect the Enchanted Forest"
+            // }, {
+            //     colorLeft: "#3b3c22",
+            //     colorRight: "#5b5d35",
+            //     colorTop: "#686d44",
+            //     conquerer: [],
+            //     gold: 88,
+            //     name: "Holy",
+            //     quest: "Find the Ancient Library"
+            // }
+            // ],
         }
     },
     mounted() {

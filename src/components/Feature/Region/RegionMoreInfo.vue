@@ -60,7 +60,7 @@ export default {
             this.$emit('close')
         },
         accept() {
-            if (this.getTeamData.gold >= this.regionInfo.gold) {
+            if (this.getTeamData.humanityPoints >= this.regionInfo.gold) {
                 const firestore = getFirestore();
                 const userCollectionReference = collection(firestore, 'users');
                 const userDoc = doc(userCollectionReference, this.getUser.uid);

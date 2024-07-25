@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header  :title="'rise of the kingdom'" :subtitle="'Add Team'"></app-header>
+        <app-header :title="'rise of the kingdom'" :subtitle="'Add Team'"></app-header>
 
         <form class="home-container" @submit.prevent="handleSubmit">
             <div class="input-container">
@@ -48,7 +48,8 @@ export default {
                 const teamRef = doc(db, 'teams', this.form.name);
                 await setDoc(teamRef, {
                     gold: 0,
-                    conqueredRegions:[]
+                    humanityPoints: 0,
+                    conqueredRegions: []
                 });
                 alert('Team added successfully!');
                 this.resetForm();

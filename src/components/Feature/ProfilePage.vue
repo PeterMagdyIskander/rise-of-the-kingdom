@@ -10,7 +10,7 @@
                 <div class="more-info-info">
                     <p class="title">Team's HP</p>
                     <div class="more-info-info-hp">
-                        <p class="info">{{ getTeamData?.gold }}</p>
+                        <p class="info">{{ getTeamData?.humanityPoints }}</p>
                         <img src="@/assets/humanityPoints-icon.svg" alt="">
                     </div>
 
@@ -19,7 +19,7 @@
                 <div class="more-info-info">
                     <p class="title">Your HP</p>
                     <div class="more-info-info-hp">
-                        <p class="info">{{ getUser.gold }}</p>
+                        <p class="info">{{ getUser.humanityPoints }}</p>
                         <img src="@/assets/humanityPoints-icon.svg" alt="">
                     </div>
                 </div>

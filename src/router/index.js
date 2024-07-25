@@ -86,7 +86,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const user = store.state.user; // Get the user object from the state
   const isAuthenticated = user !== null; // Check if the user is authenticated
-  const isAdmin = user && user.role === 'ADMIN'; // Check if the user has the admin role
+  const isAdmin = user && user.isAdmin; // Check if the user has the admin role
 
   if (to.matched.some((record) => record.meta.requiresAuth) && (!isAuthenticated || !isAdmin))  {
     next({

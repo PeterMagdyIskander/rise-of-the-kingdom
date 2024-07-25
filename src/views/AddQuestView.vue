@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header  :title="'rise of the kingdom'" :subtitle="'Add Quest'"></app-header>
+        <app-header :title="'rise of the kingdom'" :subtitle="'Add Quest'"></app-header>
 
         <form class="home-container" @submit.prevent="handleSubmit">
             <div class="input-container">
@@ -59,8 +59,7 @@
 
 
             <div class="submit-container">
-                <button type="submit" :disabled="!isFormValid"
-                    :class="{ 'disabled': !isFormValid }">SUBMIT</button>
+                <button type="submit" :disabled="!isFormValid" :class="{ 'disabled': !isFormValid }">SUBMIT</button>
             </div>
 
         </form>
@@ -69,7 +68,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { collection, getFirestore, onSnapshot, doc, updateDoc, increment,addDoc } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, doc, updateDoc, increment, addDoc } from 'firebase/firestore';
 import AppHeader from '@/components/Shared/AppHeader.vue';
 
 export default {
@@ -95,7 +94,7 @@ export default {
                 title: '',
                 description: '',
                 difficulty: 0,
-                category:'',
+                category: '',
                 reward: null,
             },
         };
@@ -110,7 +109,7 @@ export default {
                     description: this.form.description,
                     difficulty: this.form.difficulty,
                     reward: this.form.reward,
-                    category:this.form.category,
+                    category: this.form.category,
                     assignedTo: [],
                 });
                 alert('Quest added successfully!');
@@ -118,6 +117,12 @@ export default {
             } catch (error) {
                 console.error('Error adding quest: ', error);
             }
+        }, resetForm() {
+            this.form.title = ''
+            this.form.description = ''
+            this.form.difficulty = 0
+            this.form.category = ''
+            this.form.reward = null
         }
     },
 }
@@ -169,8 +174,9 @@ export default {
         &-item {
             padding: 13px;
             cursor: pointer;
-            img{
-                width:68px;
+
+            img {
+                width: 68px;
             }
         }
 

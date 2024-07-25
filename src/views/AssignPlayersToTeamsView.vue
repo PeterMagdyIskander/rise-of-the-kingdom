@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header  :title="'rise of the kingdom'" :subtitle="'Assign Players'"></app-header>
+        <app-header :title="'rise of the kingdom'" :subtitle="'Assign Players'"></app-header>
         <input class="upload-button" type="file" @change="handleFileUpload" />
     </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import AppHeader from '@/components/Shared/AppHeader.vue';
 
-import { getFirestore, writeBatch, doc, collection } from 'firebase/firestore';
+import { getFirestore, writeBatch, doc, collection ,getDocs} from 'firebase/firestore';
 
 import * as XLSX from 'xlsx';
 export default {
@@ -45,21 +45,36 @@ export default {
                 isAdmin: row.isAdmin
             }));
         },
-        async saveToFirebase(data) {
-
-            const db = getFirestore();
-            const batch = writeBatch(db);
-            const assignationRef = collection(db, "assignation");
-            data.forEach(item => {
-                const docRef = doc(assignationRef)
-                batch.set(docRef, item);
+        // Function to delete all documents in a collection
+        async deleteCollection(collectionRef) {
+            const querySnapshot = await getDocs(collectionRef);
+            const batch = writeBatch(getFirestore());
+            querySnapshot.forEach((doc) => {
+                batch.delete(doc.ref);
             });
+            await batch.commit();
+        },
+
+        // Function to save new data to Firestore
+        async saveToFirebase(data) {
+            const db = getFirestore();
+            const assignationCollectionRef = collection(db, "assignation");
 
             try {
+                // Delete old collection data
+                await this.deleteCollection(assignationCollectionRef);
+
+                // Add new data
+                const batch = writeBatch(db);
+                data.forEach(item => {
+                    const docRef = doc(assignationCollectionRef);
+                    batch.set(docRef, item);
+                });
+
                 await batch.commit();
                 alert('Data successfully written to Firebase!');
             } catch (error) {
-                alert('Error writing document: ', error);
+                alert('Error writing document: ' + error);
             }
         }
     }

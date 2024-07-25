@@ -21,6 +21,7 @@ export default {
             const regionCollectionReference = collection(firestore, 'regions');
             const userDoc = doc(userCollectionReference, uid);
 
+                    
             try {
                 const docSnap = await getDoc(userDoc);
                 if (docSnap.exists()) {
@@ -28,13 +29,20 @@ export default {
                     let user = {
                         ...data
                     }
+                    
                     const teamDoc = doc(teamCollectionReference, user.teamId);
                     const regionDoc = doc(regionCollectionReference, user.assignedRegionId);
 
+                    const regionDocSnap = await getDoc(regionDoc);
+                    const regionData = regionDocSnap.data();
+                    let region = {
+                        ...regionData
+                    }
                     updateDoc(userDoc, {
                         assignedRegionId: "",
                     })
                     updateDoc(teamDoc, {
+                        gold: increment(1000 - ((region.conquerer.length) * 250)),
                         conqueredRegions: arrayUnion(user.assignedRegionId),
                     })
                     updateDoc(regionDoc, {

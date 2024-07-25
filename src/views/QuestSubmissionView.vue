@@ -33,10 +33,10 @@ export default {
 
                     updateDoc(userDoc, {
                         assignedQuestId: "",
-                        gold: increment(quest.reward),
+                        humanityPoints: increment(quest.reward),
                     })
                     updateDoc(teamDoc, {
-                        gold: increment(quest.reward),
+                        humanityPoints: increment(quest.reward),
                     })
                     alert("Quest points reflected successfuly!")
                 } else {

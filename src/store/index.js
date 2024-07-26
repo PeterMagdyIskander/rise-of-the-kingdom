@@ -46,80 +46,80 @@ export default createStore({
     async login({ commit }) {
       commit('setFailed', false);
       commit('setLoading', true);
-
+    
       const storedCredentials = getStoredCredentials();
       if (areCredentialsValid(storedCredentials)) {
         commit('setUser', storedCredentials.user);
         commit('setLoading', false);
         return Promise.resolve(storedCredentials.user);
       }
-
+    
       const provider = new GoogleAuthProvider();
-      return signInWithPopup(getAuth(), provider).then(async res => {
+      try {
+        const res = await signInWithPopup(getAuth(), provider);
         const firestore = getFirestore();
         const userCollectionReference = collection(firestore, 'users');
         const assignationCollectionRef = collection(firestore, 'assignation');
-        //GET ASSIGNATION DATA FOR TEAM AND ADMIN ASSIGNATION
-        onSnapshot(assignationCollectionRef, snapshot => {
-          const assignationData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-          return new Promise((resolve, reject) => {
-            //GET USER DATA
-            onSnapshot(userCollectionReference, snapshot => {
-              const allUsers = snapshot.docs.map(doc => doc.id);
-              let newUser = !allUsers.includes(res.user.uid);
-              let user = null;
-              const playerData = assignationData.filter(data => data.playerMail === res.user.email)[0];
-              if (newUser) {
-                user = {
-                  uid: res.user.uid,
-                  name: res.user.displayName,
-                  assignedQuestId: "",
-                  assignedRegionId: "",
-                  isTeamLead: playerData?.isTeamLead||'dev',
-                  teamId: playerData?.teamId||'dev',
-                  isAdmin: playerData?.isAdmin||'dev',
-                  email: res.user.email,
-                  humanityPoints: 0
-                }
-                setDoc(doc(firestore, "users", res.user.uid), user, { merge: true }).then(() => {
-                  const credentials = {
-                    user,
-                    token: res.user.accessToken,
-                    expiry: new Date().getTime() + 3600 * 1000 // 1 hour expiry
-                  };
-                  saveCredentials(credentials);
-                  commit('setUser', user);
-                  resolve(user);
-                }).catch(reject);
-              } else {
-                const userDoc = doc(userCollectionReference, res.user.uid);
-                onSnapshot(userDoc, snapshot => {
-                  const data = snapshot.data();
-                  user = {
-                    uid: res.user.uid,
-                    email: res.user.email,
-                    ...data
-                  }
-                  const credentials = {
-                    user,
-                    token: res.user.accessToken,
-                    expiry: new Date().getTime() + 3600 * 1000 // 1 hour expiry
-                  };
-                  saveCredentials(credentials);
-                  commit('setUser', user);
-                  resolve(user);
-                }, reject);
-              }
+    
+        const assignationSnapshot = await new Promise((resolve, reject) => {
+          onSnapshot(assignationCollectionRef, snapshot => {
+            resolve(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+          }, reject);
+        });
+    
+        const userSnapshot = await new Promise((resolve, reject) => {
+          onSnapshot(userCollectionReference, snapshot => {
+            resolve(snapshot.docs.map(doc => doc.id));
+          }, reject);
+        });
+    
+        const assignationData = assignationSnapshot;
+        const allUsers = userSnapshot;
+        let newUser = !allUsers.includes(res.user.uid);
+        let user = null;
+        const playerData = assignationData.filter(data => data.playerMail === res.user.email)[0];
+    
+        if (newUser) {
+          user = {
+            uid: res.user.uid,
+            name: res.user.displayName,
+            assignedQuestId: "",
+            assignedRegionId: "",
+            isTeamLead: playerData?.isTeamLead || 'dev',
+            teamId: playerData?.teamId || 'dev',
+            isAdmin: playerData?.isAdmin || 'dev',
+            email: res.user.email,
+            humanityPoints: 0
+          }
+          await setDoc(doc(firestore, "users", res.user.uid), user, { merge: true });
+        } else {
+          const userDoc = doc(userCollectionReference, res.user.uid);
+          const userSnapshot = await new Promise((resolve, reject) => {
+            onSnapshot(userDoc, snapshot => {
+              resolve(snapshot.data());
             }, reject);
           });
-        })
-      }).catch(err => {
+          user = {
+            uid: res.user.uid,
+            email: res.user.email,
+            ...userSnapshot
+          };
+        }
+    
+        const credentials = {
+          user,
+          token: res.user.accessToken,
+          expiry: new Date().getTime() + 3600 * 1000 // 1 hour expiry
+        };
+        saveCredentials(credentials);
+        commit('setUser', user);
+        return user;
+      } catch (err) {
         console.error(err);
         commit('setFailed', true);
-      }).finally(() => {
+      } finally {
         commit('setLoading', false);
-      });
+      }
     },
     updateUser({ commit }, user) {
       commit('setUser', user);

@@ -111,13 +111,13 @@ export default {
     background-size: 2em 2em;
     background-color: #1C464E;
     padding: 0 15px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     border-radius: 5px 5px 0 0;
     border-top: 5px solid #fff;
     border-left: 5px solid #fff;
     border-right: 5px solid #fff;
-
+    z-index: 1000;
     .title {
         display: flex;
         align-items: center;

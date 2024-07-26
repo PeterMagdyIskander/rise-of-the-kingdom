@@ -71,7 +71,7 @@ export default {
             }
         },
         generateQRCode() {
-            const url = `secyouth.com/RegionSubmission/${this.getUser.uid}`;
+            const url = `secyouth.com/#/RegionSubmission/${this.getUser.uid}`;
             const qrCodeContainer = document.getElementById('qrcode');
 
             QRCode.toCanvas(url, { errorCorrectionLevel: 'H' }, function (error, canvas) {

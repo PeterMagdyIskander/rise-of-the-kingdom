@@ -28,7 +28,7 @@ export default {
     mounted() {
         this.quest = this.getQuests.filter(quest => quest.id === this.getUser.assignedQuestId)[0];
         if(!this.quest)return
-        const url = `secyouth.com/questSubmission/${this.getUser.uid}`;
+        const url = `secyouth.com/#/QuestSubmission/${this.getUser.uid}`;
         const qrCodeContainer = document.getElementById('submissionQRCode');
         QRCode.toCanvas(url, { errorCorrectionLevel: 'H' }, function (error, canvas) {
             if (error) console.error(error);

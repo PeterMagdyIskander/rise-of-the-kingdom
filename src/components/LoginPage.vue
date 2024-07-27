@@ -10,7 +10,7 @@
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: "LoginPage",
-  computed: mapGetters(['getUser', 'getQuests', 'getLoading', 'getFailed', mapActions]),
+  computed: mapGetters(['getUser', 'getQuests', 'getTeamData', 'getFailed', mapActions]),
   methods: {
     ...mapActions(['login', 'setQuests', 'setTeamData']),
     async signIn() {
@@ -20,6 +20,7 @@ export default {
           const user=await this.login();
           await this.setQuests();
           await this.setTeamData(user.teamId)
+          console.log(this.getTeamData)
         } catch (error) {
           console.error('Login failed', error);
         } finally {

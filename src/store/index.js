@@ -24,7 +24,7 @@ export default createStore({
   state: {
     user: null,
     quests: [],
-    teamData: {},
+    teamData: null,
     loading: false,
     failed: false,
   },

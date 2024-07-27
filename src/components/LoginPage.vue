@@ -17,9 +17,9 @@ export default {
       if (!this.getLoading) {
         const redirect = this.$route.query.redirect || '/';
         try {
-          await this.login();
+          const user=await this.login();
           await this.setQuests();
-          await this.setTeamData(this.getUser.teamId)
+          await this.setTeamData(user.teamId)
         } catch (error) {
           console.error('Login failed', error);
         } finally {

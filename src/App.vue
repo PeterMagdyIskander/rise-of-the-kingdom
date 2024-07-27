@@ -89,7 +89,7 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 100;
+      z-index: 1100;
       appearance: none;
       cursor: pointer;
       outline: none;

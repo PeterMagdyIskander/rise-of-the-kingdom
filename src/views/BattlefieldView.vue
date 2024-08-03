@@ -1,6 +1,6 @@
 <template>
     <div class="battlefield">
-        <app-header :title="'rise of the kingdom'" :subtitle="'Battlefield'"></app-header>
+        <app-header></app-header>
         <Map @selectRegion="select"></Map>
         <div class="navigation-section">
             <div class="navigation-section-item" @click="navigateTo('/')">
@@ -55,8 +55,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .battlefield {
-    height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;

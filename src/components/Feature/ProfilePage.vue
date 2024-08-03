@@ -1,9 +1,6 @@
 <template>
     <div>
-        <div class="header-container">
-            <p class="logo">Level Up</p>
-            <p class="title">RISE OF THE KINGDOM</p>
-        </div>
+        <app-header></app-header>
         <div class="home-container">
             <h1 class="profile-name">{{ `Hi ${getUser.name.split(" ")[0]}!` }}</h1>
             <div class="more-info">

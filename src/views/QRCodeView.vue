@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header  :title="'rise of the kingdom'" :subtitle="'My QR Code'"></app-header>
+        <app-header></app-header>
         <div id="qrcode"></div>
     </div>
 </template>

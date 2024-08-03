@@ -14,11 +14,10 @@
             </div>
             <div class="hp-count">{{ getTeamData?.humanityPoints }}</div>
 
-            <grace-region class="region"></grace-region>
+            <grace-region class="region" :regionInfo="getGraceRegion()" @clickRegion="selectRegion"></grace-region>
         </div>
         <div class="main-regions">
-            <region v-for="region in regions" :key="region.name" :color-left="region.colorLeft"
-                :color-right="region.colorRight" :color-top="region.colorTop" :class="region.name.toLowerCase()"
+            <region v-for="region in getNotGraceRegions()" :key="region.name" :class="region.name.toLowerCase()"
                 :region-info="region" @clickRegion="selectRegion"></region>
         </div>
 
@@ -117,8 +116,13 @@ export default {
         selectRegion(region) {
             if (this.getUser.assignedRegionId === region.id || this.getUser.assignedRegionId === '')
                 this.$emit('selectRegion', region)
-
         },
+        getGraceRegion(){
+            return this.regions.filter(region=>region.name==="Grace")[0]
+        },
+        getNotGraceRegions(){
+            return this.regions.filter(region=>region.name!=="Grace")
+        }
     }
 }
 </script>
@@ -126,8 +130,8 @@ export default {
 <style lang="scss" scoped>
 .map {
 
-    width: 80%;
-    height: 60%;
+    width: 338px;
+    height: 475px;
     margin-top: 30px;
 
     display: flex;

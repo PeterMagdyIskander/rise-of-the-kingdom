@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header :title="'rise of the kingdom'" :subtitle="'Add Team'"></app-header>
+        <app-header></app-header>
 
         <form class="home-container" @submit.prevent="handleSubmit">
             <div class="input-container">

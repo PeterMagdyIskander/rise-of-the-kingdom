@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header  :title="'rise of the kingdom'" :subtitle="'Leaderboard'"></app-header>
+        <app-header></app-header>
 
         <h1>Leaderboard</h1>
         <table>

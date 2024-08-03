@@ -1,24 +1,13 @@
 <template>
     <div class="header-container">
-        <p class="logo">{{ title }}</p>
-        <p class="title">{{ subtitle }}</p>
+        <p class="logo">Level Up</p>
+        <p class="title">RISE OF THE KINGDOM</p>
     </div>
 </template>
 
 <script>
 export default {
     name: "app-header",
-    props: {
-        title: {
-            type: String,
-            required: false,
-        },
-        subtitle: {
-            type: String,
-            required: true,
-        },
-
-    }
 }
 </script>
 
@@ -31,18 +20,20 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 20px;
 
     & .logo {
         font-family: 'pressstart2p';
-        color: #f4ee80;
-        text-shadow: 1px 2px #a14759;
-        font-size: 14px;
+        color: #F7C970;
+        text-shadow: 1px 2px #C86730;
+        font-size: 34px;
+        margin: 0
     }
 
     & .title {
         font-family: 'pressstart2p';
-        font-size: 18px;
+        color: #F7C970;
+        text-shadow: 1px 2px #C86730;
+        font-size: 12px;
 
     }
 }

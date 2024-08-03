@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-header  :title="'rise of the kingdom'" :subtitle="'Quest Info'"></app-header>
+        <app-header></app-header>
         <QuestMoreInfo :quest="quest[0]"></QuestMoreInfo>
 
         <div class="button-container">

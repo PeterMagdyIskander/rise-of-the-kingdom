@@ -13,10 +13,14 @@
 
             </div>
             <div class="hp-count">{{ getTeamData?.humanityPoints }}</div>
+
+            <grace-region class="region"></grace-region>
         </div>
-        <region v-for="region in regions" :key="region.name" :color-left="region.colorLeft"
-            :color-right="region.colorRight" :color-top="region.colorTop" :class="region.name.toLowerCase()"
-            :region-info="region" @clickRegion="selectRegion"></region>
+        <div class="main-regions">
+            <region v-for="region in regions" :key="region.name" :color-left="region.colorLeft"
+                :color-right="region.colorRight" :color-top="region.colorTop" :class="region.name.toLowerCase()"
+                :region-info="region" @clickRegion="selectRegion"></region>
+        </div>
 
     </div>
 </template>
@@ -24,16 +28,18 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { collection, getFirestore, onSnapshot, doc, updateDoc, increment ,writeBatch} from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, doc, updateDoc, increment, writeBatch } from 'firebase/firestore';
 
 import Region from '@/components/Feature/Region/Region.vue'
+import GraceRegion from '@/components/Feature/Region/GraceRegion.vue'
 export default {
     name: "map",
     computed: {
         ...mapGetters(['getUser', 'getTeamData']),
     },
     components: {
-        Region
+        Region,
+        GraceRegion
     },
     data() {
         return {
@@ -119,48 +125,58 @@ export default {
 
 <style lang="scss" scoped>
 .map {
-    position: relative;
+
     width: 80%;
     height: 60%;
     margin-top: 30px;
+
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-    .love {
-        position: absolute;
-        top: 100px;
-        left: 0px;
-    }
+    .main-regions {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
 
-    .mercy {
-        position: absolute;
-        top: 106px;
-        left: 110px;
-    }
+        .love {
+            position: absolute;
+            top: 100px;
+            left: 0px;
+        }
 
-    .compassion {
-        position: absolute;
-        top: 167px;
-        left: 190px;
-    }
+        .mercy {
+            position: absolute;
+            top: 106px;
+            left: 110px;
+        }
 
-    .peace {
-        position: absolute;
-        top: 193px;
-        left: 74px;
-    }
+        .compassion {
+            position: absolute;
+            top: 167px;
+            left: 190px;
+        }
 
-    .holy {
-        position: absolute;
-        top: 290px;
-        left: 13px;
-    }
+        .peace {
+            position: absolute;
+            top: 193px;
+            left: 74px;
+        }
 
-    .joy {
-        position: absolute;
-        top: 265px;
-        left: 127px;
-        z-index: 1;
+        .holy {
+            position: absolute;
+            top: 290px;
+            left: 13px;
+        }
+
+        .joy {
+            position: absolute;
+            top: 265px;
+            left: 127px;
+            z-index: 1;
+        }
     }
 }
 
@@ -198,6 +214,13 @@ export default {
     img {
         width: 30px;
         height: 30px;
+    }
+
+    .region {
+        position: absolute;
+        z-index: 2;
+        right: -20px;
+        top: 19px;
     }
 }
 </style>

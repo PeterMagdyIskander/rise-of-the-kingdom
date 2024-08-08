@@ -96,6 +96,7 @@ export default {
     props: {
         regionInfo: {
             type: Object,
+            required:true
         }
     },
     methods: {

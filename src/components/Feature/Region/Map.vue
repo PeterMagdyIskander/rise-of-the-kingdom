@@ -14,10 +14,10 @@
             </div>
             <div class="hp-count">{{ getTeamData?.humanityPoints }}</div>
 
-            <grace-region class="region" :regionInfo="getGraceRegion()" @clickRegion="selectRegion"></grace-region>
+            <grace-region class="region" :regionInfo="graceRegion" @clickRegion="selectRegion"></grace-region>
         </div>
         <div class="main-regions">
-            <region v-for="region in getNotGraceRegions()" :key="region.name" :class="region.name.toLowerCase()"
+            <region v-for="region in notGraceRegion" :key="region.name" :class="region.name.toLowerCase()"
                 :region-info="region" @clickRegion="selectRegion"></region>
         </div>
 
@@ -42,7 +42,8 @@ export default {
     },
     data() {
         return {
-            regions: [],
+            notGraceRegion: [],
+            graceRegion:{}
             // regions: [{
             //     colorLeft: "#233c37",
             //     colorRight: "#2d5149",
@@ -110,6 +111,8 @@ export default {
         const questsCollectionReference = collection(firestore, 'regions');
         onSnapshot(questsCollectionReference, snapshot => {
             this.regions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            this.notGraceRegion=this.getNotGraceRegions()
+            this.graceRegion=this.getGraceRegion();
         })
     },
     methods: {

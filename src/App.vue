@@ -14,6 +14,7 @@
             <li class="sidemenu__item" @click="closeMenu"> <router-link to="/Battlefield">Battlefield</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/MyQuest">My Quest</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/QRCode">Attendance</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin"><router-link to="/TransferPoints">Transfer Points</router-link></li>
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin"><router-link to="/AddQuest">Add Quest</router-link></li>
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin"><router-link to="/AddTeam">Add Team</router-link></li>
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin"><router-link to="/AssignPlayers">Assign Players</router-link></li>

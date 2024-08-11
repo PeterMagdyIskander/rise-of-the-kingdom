@@ -3,14 +3,14 @@
         <div class="card-order">
 
             <p class="title">{{ order }}</p>
-            <img class="planet-img" v-if="title === 'Dynamis'" src="@/assets/dynamis-planet-ship-small.svg"
-                alt="dynamis planet">
-            <img class="planet-img" v-if="title === 'Lumos'" src="@/assets/lumos-planet-ship-small.svg"
-                alt="lumos planet">
-            <img class="planet-img" v-if="title === 'Kalos'" src="@/assets/kalos-planet-ship-small.svg"
-                alt="kalos planet">
-            <img class="planet-img" v-if="title === 'Astro'" src="@/assets/astro-planet-ship-small.svg"
-                alt="astro planet">
+            <img class="planet-img" v-if="title === 'Aburame'" src="@/assets/Aburame-planet-ship-small.svg"
+                alt="Aburame planet">
+            <img class="planet-img" v-if="title === 'Akamichi'" src="@/assets/Akamichi-planet-ship-small.svg"
+                alt="Akamichi planet">
+            <img class="planet-img" v-if="title === 'Uzumaki'" src="@/assets/Uzumaki-planet-ship-small.svg"
+                alt="Uzumaki planet">
+            <img class="planet-img" v-if="title === 'Uchiha'" src="@/assets/Uchiha-planet-ship-small.svg"
+                alt="Uchiha planet">
 
 
             <p class="logo">{{ title }}</p>

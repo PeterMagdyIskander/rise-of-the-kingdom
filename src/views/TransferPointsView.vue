@@ -2,18 +2,21 @@
     <div class="attack-container">
 
         <div class="planets-battlefield">
-            <div id="NW" @click="handleClick('Astro')">
-                <BaseContainer :teamId="'Astro'" :selected="selectedTeamId === 'Astro'"></BaseContainer>
+            <div id="NW" @click="handleClick('Uchiha')">
+                <BaseContainer :teamId="'Uchiha'" :selected="selectedTeamId === 'Uchiha'"></BaseContainer>
             </div>
-            <div id="NE" @click="handleClick('Kalos')">
-                <BaseContainer :teamId="'Kalos'" :selected="selectedTeamId === 'Kalos'"></BaseContainer>
+            <div id="NE" @click="handleClick('Uzumaki')">
+                <BaseContainer :teamId="'Uzumaki'" :selected="selectedTeamId === 'Uzumaki'"></BaseContainer>
             </div>
-            <div id="SW" @click="handleClick('Lumos')">
-                <BaseContainer :teamId="'Lumos'" :selected="selectedTeamId === 'Lumos'"></BaseContainer>
+            <div id="SW" @click="handleClick('Akamichi')">
+                <BaseContainer :teamId="'Akamichi'" :selected="selectedTeamId === 'Akamichi'"></BaseContainer>
             </div>
-            <div id="SE" @click="handleClick('Dynamis')">
-                <BaseContainer :teamId="'Dynamis'" :selected="selectedTeamId === 'Dynamis'"></BaseContainer>
+            <div id="SE" @click="handleClick('Aburame')">
+                <BaseContainer :teamId="'Aburame'" :selected="selectedTeamId === 'Aburame'"></BaseContainer>
             </div>
+        </div>
+        <div class="button-container">
+            <button @click="accept">Give back</button>
         </div>
     </div>
 </template>
@@ -81,6 +84,7 @@ export default {
 }
 
 #NW {
+    background-color: #000000;
     position: absolute;
     width: 50%;
     height: 45%;
@@ -89,9 +93,13 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    border-top: 3px solid #0A6E78;
+    border-left: 3px solid #0A6E78;
+    border-radius: 12px 0 0 0;
 }
 
 #NE {
+    background-color: #000000;
     position: absolute;
     width: 50%;
     height: 45%;
@@ -100,9 +108,14 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    border-top: 3px solid #0A6E78;
+    border-right: 3px solid #0A6E78;
+    border-radius: 0 12px 0 0;
+
 }
 
 #SW {
+    background-color: #000000;
     position: absolute;
     width: 50%;
     height: 45%;
@@ -112,9 +125,13 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 5px;
+    border-bottom: 3px solid #0A6E78;
+    border-left: 3px solid #0A6E78;
+    border-radius: 0 0 0 12px;
 }
 
 #SE {
+    background-color: #000000;
     position: absolute;
     width: 50%;
     height: 45%;
@@ -124,6 +141,10 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    border-bottom: 3px solid #0A6E78;
+    border-right: 3px solid #0A6E78;
+    border-radius: 0 0 12px 0;
+
 }
 
 #SE,
@@ -134,5 +155,21 @@ export default {
 #NE,
 #SE {
     border-left: 1px solid #3E8898;
+}
+.button-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        padding: 15px;
+        background-color: #3E8898;
+        border-radius: 6px;
+        border: 1px solid #E5E5E5;
+        color: #E5E5E5;
+        font-size: 1.2rem;
+        font-family: 'pressstart2p';
+    }
 }
 </style>

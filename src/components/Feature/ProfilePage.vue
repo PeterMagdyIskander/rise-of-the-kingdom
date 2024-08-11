@@ -22,14 +22,14 @@
                 </div>
             </div>
             <div class="ship-container">
-                <img class="planet-img" v-if="getUser.teamId === 'Dynamis'" src="@/assets/dynamis-planet-ship.svg"
-                    alt="dynamis planet">
-                <img class="planet-img" v-if="getUser.teamId === 'Lumos'" src="@/assets/lumos-planet-ship.svg"
-                    alt="lumos planet">
-                <img class="planet-img" v-if="getUser.teamId === 'Kalos'" src="@/assets/kalos-planet-ship.svg"
-                    alt="kalos planet">
-                <img class="planet-img" v-if="getUser.teamId === 'Astro'" src="@/assets/astro-planet-ship.svg"
-                    alt="astro planet">
+                <img class="planet-img" v-if="getUser.teamId === 'Aburame'" src="@/assets/Aburame-planet-ship.svg"
+                    alt="Aburame planet">
+                <img class="planet-img" v-if="getUser.teamId === 'Akamichi'" src="@/assets/Akamichi-planet-ship.svg"
+                    alt="Akamichi planet">
+                <img class="planet-img" v-if="getUser.teamId === 'Uzumaki'" src="@/assets/Uzumaki-planet-ship.svg"
+                    alt="Uzumaki planet">
+                <img class="planet-img" v-if="getUser.teamId === 'Uchiha'" src="@/assets/Uchiha-planet-ship.svg"
+                    alt="Uchiha planet">
 
                 <h1 class="planet-title" :class="getUser.teamId">{{ getUser.teamId }}</h1>
                 <div class="health-section">
@@ -78,25 +78,25 @@ export default {
     methods: {
         getColor() {
             switch (this.getUser.teamId) {
-                case 'Kalos':
+                case 'Uzumaki':
                     return '#B62E4D'
-                case 'Lumos':
+                case 'Akamichi':
                     return '#FEC802'
-                case 'Dynamis':
+                case 'Aburame':
                     return '#BC2FFF'
-                case 'Astro':
+                case 'Uchiha':
                     return '#56E0FF'
             }
         },
         getBEColor() {
             switch (this.getUser.teamId) {
-                case 'Kalos':
+                case 'Uzumaki':
                     return '#44111C'
-                case 'Lumos':
+                case 'Akamichi':
                     return '#5F4B02'
-                case 'Dynamis':
+                case 'Aburame':
                     return '#4C1866'
-                case 'Astro':
+                case 'Uchiha':
                     return '#162041'
             }
         }, navigateTo(to) {
@@ -241,22 +241,22 @@ p {
     .planet-title {
         font-family: 'pressstart2p';
 
-        &.Dynamis {
+        &.Aburame {
             color: #BC2FFF;
             text-shadow: 0 3px #4C1866;
         }
 
-        &.Lumos {
+        &.Akamichi {
             color: #FEC802;
             text-shadow: 3px 3px #5F4B02;
         }
 
-        &.Kalos {
+        &.Uzumaki {
             color: #B62E4D;
             text-shadow: 0 3px #44111C;
         }
 
-        &.Astro {
+        &.Uchiha {
             color: #56E0FF;
             text-shadow: 0 3px #162041;
         }

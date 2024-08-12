@@ -11,7 +11,8 @@ function areCredentialsValid(credentials) {
 }
 
 export function saveCredentials(credentials) {
-  localStorage.setItem('userCredentials', JSON.stringify(credentials));
+  if (credentials.user.isAdmin)
+    localStorage.setItem('userCredentials', JSON.stringify(credentials));
 }
 
 function getStoredCredentials() {
@@ -46,39 +47,39 @@ export default createStore({
     async login({ commit }) {
       commit('setFailed', false);
       commit('setLoading', true);
-    
+
       const storedCredentials = getStoredCredentials();
       if (areCredentialsValid(storedCredentials)) {
         commit('setUser', storedCredentials.user);
         commit('setLoading', false);
         return Promise.resolve(storedCredentials.user);
       }
-    
+
       const provider = new GoogleAuthProvider();
       try {
         const res = await signInWithPopup(getAuth(), provider);
         const firestore = getFirestore();
         const userCollectionReference = collection(firestore, 'users');
         const assignationCollectionRef = collection(firestore, 'assignation');
-    
+
         const assignationSnapshot = await new Promise((resolve, reject) => {
           onSnapshot(assignationCollectionRef, snapshot => {
             resolve(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
           }, reject);
         });
-    
+
         const userSnapshot = await new Promise((resolve, reject) => {
           onSnapshot(userCollectionReference, snapshot => {
             resolve(snapshot.docs.map(doc => doc.id));
           }, reject);
         });
-    
+
         const assignationData = assignationSnapshot;
         const allUsers = userSnapshot;
         let newUser = !allUsers.includes(res.user.uid);
         let user = null;
         const playerData = assignationData.filter(data => data.playerMail === res.user.email)[0];
-    
+
         if (newUser) {
           user = {
             uid: res.user.uid,
@@ -105,7 +106,7 @@ export default createStore({
             ...userSnapshot
           };
         }
-    
+
         const credentials = {
           user,
           token: res.user.accessToken,

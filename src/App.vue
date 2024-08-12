@@ -10,16 +10,22 @@
         <div class="sidemenu__wrapper">
           <ul class="sidemenu__list">
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/">Home</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu"> <router-link to="/Battlefield">Explore</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/QuestCenter">Quest Center</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu"> <router-link to="/Battlefield">Battlefield</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/MyQuest">My Quest</router-link></li>
             <li class="sidemenu__item" @click="closeMenu"><router-link to="/QRCode">Attendance</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu"><router-link to="/TransferPoints">Transfer Points</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin===true"><router-link to="/AddQuest">Add Quest</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin===true"><router-link to="/AddTeam">Add Team</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin===true"><router-link to="/AssignPlayers">Assign Players</router-link></li>
-            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin===true"><router-link to="/Leaderboard">Leaderboard</router-link></li>
-          
+            <li class="sidemenu__item" @click="closeMenu" v-if="correctTime() && getUser.isTeamLead"><router-link
+                to="/TransferPoints">Transfer Points</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
+                to="/AddQuest">Add
+                Quest</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link to="/AddTeam">Add
+                Team</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
+                to="/AssignPlayers">Assign Players</router-link></li>
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
+                to="/Leaderboard">Leaderboard</router-link></li>
+
           </ul>
         </div>
       </nav>
@@ -42,6 +48,12 @@ export default {
   }, methods: {
     closeMenu() {
       this.navOpen = false;
+    },
+    correctTime() {
+      const date = new Date();
+      const hour = date.getHours();
+      const minutes = date.getMinutes();
+      return hour === 21 && minutes <= 30;
     }
   },
   computed: mapGetters(['getUser',]),
@@ -52,8 +64,8 @@ html,
 body {
   height: 100%;
   background-image: radial-gradient(rgb(168 165 104 / 30%) 1px, transparent 0);
-    background-size: 2em 2em;
-    background-color: #042226 !important;
+  background-size: 2em 2em;
+  background-color: #042226 !important;
 
   >* {
     color: #FFF;

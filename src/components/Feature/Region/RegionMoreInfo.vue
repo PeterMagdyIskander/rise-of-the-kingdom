@@ -9,7 +9,7 @@
         </div>
 
         <div class="" v-if="getTeamData.conqueredRegions.includes(regionInfo.id)">
-            <ConquererCard v-for="(team,index) in regionInfo.conquerer" :title="team" :order="index+1"></ConquererCard>
+            <ConquererCard v-for="(team, index) in regionInfo.conquerer" :title="team" :order="index + 1"></ConquererCard>
         </div>
         <div v-else>
             <div class="quest" v-if="getUser.assignedRegionId !== regionInfo.id">
@@ -40,8 +40,8 @@ import QRCode from 'qrcode';
 import ConquererCard from './ConquererCard.vue';
 export default {
     name: 'region-more-info',
-    components:{
-        
+    components: {
+
         ConquererCard
     },
     props: {
@@ -56,15 +56,22 @@ export default {
     },
     computed: mapGetters(['getUser', 'getTeamData']),
     methods: {
+        
+        ...mapActions(['updateUser']),
         decline() {
             this.$emit('close')
         },
         accept() {
+            if (this.getUser.assignedRegionId != '')
+                return alert("Another Region quest is assigned")
             if (this.getTeamData.humanityPoints >= this.regionInfo.gold) {
                 const firestore = getFirestore();
                 const userCollectionReference = collection(firestore, 'users');
                 const userDoc = doc(userCollectionReference, this.getUser.uid);
                 updateDoc(userDoc, { assignedRegionId: this.regionInfo.id })
+                let updatedUser = this.getUser;
+                updatedUser.assignedRegionId =  this.regionInfo.id;
+                this.updateUser(updatedUser);
                 alert("Land quest started successfuly!")
             } else {
                 alert("Your team doesn't have enough humanity points!")
@@ -118,6 +125,7 @@ export default {
     border-left: 5px solid #fff;
     border-right: 5px solid #fff;
     z-index: 1000;
+
     .title {
         display: flex;
         align-items: center;

@@ -14,7 +14,7 @@
             </div>
             <div class="hp-count">{{ getTeamData?.humanityPoints }}</div>
 
-            <grace-region class="region" :regionInfo="graceRegion" @clickRegion="selectRegion"></grace-region>
+            <grace-region v-if="getTeamData.showGrace" class="region" :regionInfo="graceRegion" @clickRegion="selectRegion"></grace-region>
         </div>
         <div class="main-regions">
             <region v-for="region in notGraceRegion" :key="region.name" :class="region.name.toLowerCase()"

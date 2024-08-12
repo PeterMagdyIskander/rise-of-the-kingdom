@@ -15,21 +15,24 @@
                 <BaseContainer :teamId="'Aburame'" :selected="selectedTeamId === 'Aburame'"></BaseContainer>
             </div>
         </div>
+
         <div class="button-container">
-            <button @click="accept">Give back</button>
+            <input type="number" :placeholder="`Your team has ${myTeamData.gold} gold`" :min="1" :max="myTeamData.gold"
+                v-model="giveBackGold">
+            <button @click="giveBack" :disabled="selectedTeamId === ''">Give Back</button>
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { collection, getFirestore, onSnapshot, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, doc, updateDoc, increment, serverTimestamp } from 'firebase/firestore';
 import BaseContainer from '@/components/Feature/Base/BaseContainer.vue';
 
 export default {
     name: "transfer-points-view",
     computed: {
-        ...mapGetters(['getUser']),
+        ...mapGetters(['getUser', 'getTeamData']),
     },
     components: {
         BaseContainer,
@@ -41,11 +44,14 @@ export default {
             myTeamData: {},
             isAttacker: true,
             selectedTeamId: "",
+            giveBackGold: '',
         }
     },
     created() {
     },
     mounted() {
+        if (!this.correctTime()||!this.getUser.isTeamLead)
+            this.$router.push("/");
         const firestore = getFirestore();
         const teamCollectionReference = collection(firestore, 'teams');
         onSnapshot(teamCollectionReference, snapshot => {
@@ -68,6 +74,43 @@ export default {
             }
 
         },
+        giveBack() {
+            const firestore = getFirestore();
+            const teamCollectionReference = collection(firestore, 'teams');
+            const myTeamDoc = doc(teamCollectionReference, this.getUser.teamId);
+            const selectedTeamDoc = doc(teamCollectionReference, this.selectedTeamId);
+
+            if (this.giveBackGold >= 1 && this.giveBackGold <= this.myTeamData.gold) {
+                if (this.giveBackGold >= (this.myTeamData.gold / 2)) {
+                    updateDoc(myTeamDoc, {
+                        giveBackGold: increment(this.giveBackGold),
+                        gold: increment((this.giveBackGold * -1)),
+                        showGrace: true,
+                        timestamps: arrayUnion(serverTimestamp()),  // Add current server timestamp to the timestamps array
+                    })
+                    updateDoc(selectedTeamDoc, {
+                        gold: increment(this.giveBackGold),
+                    })
+                    alert("Lost Grace Discovereed!")
+                } else {
+                    updateDoc(myTeamDoc, {
+                        giveBackGold: increment(this.giveBackGold),
+                        gold: increment(this.giveBackGold * -1),
+                        timestamps: arrayUnion(serverTimestamp()),  // Add current server timestamp to the timestamps array  
+                    })
+                    updateDoc(selectedTeamDoc, {
+                        gold: increment(this.giveBackGold),
+                    })
+                    alert("Gave Back Successfuly!")
+                }
+            }
+        },
+        correctTime() {
+            const date = new Date();
+            const hour = date.getHours();
+            const minutes = date.getMinutes();
+            return hour === 21 && minutes <= 30;
+        }
     }
 }
 </script>
@@ -156,11 +199,25 @@ export default {
 #SE {
     border-left: 1px solid #3E8898;
 }
+
 .button-container {
+    position: absolute;
+    bottom: -60px;
     width: 100%;
     display: flex;
+    flex-direction: column;
+    row-gap: 10px;
     align-items: center;
     justify-content: center;
+
+    input {
+        height: 45px;
+        width: 80%;
+        background-color: #E5E5E5;
+        border-radius: 6px;
+        border: 1px solid #3E8898;
+        text-align: center;
+    }
 
     button {
         padding: 15px;
@@ -170,6 +227,7 @@ export default {
         color: #E5E5E5;
         font-size: 1.2rem;
         font-family: 'pressstart2p';
+        margin-bottom: 10px;
     }
 }
 </style>

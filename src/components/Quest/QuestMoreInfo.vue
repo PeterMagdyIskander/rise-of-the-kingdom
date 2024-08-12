@@ -94,7 +94,7 @@ p {
     & p:nth-child(1) {
         font-family: 'pressstart2p';
         font-size: 12px;
-        color: #F09455;
+        color: #FEE969;
     }
 
     & p:nth-child(2) {

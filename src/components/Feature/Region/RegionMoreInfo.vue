@@ -9,12 +9,13 @@
         </div>
 
         <div class="" v-if="getTeamData.conqueredRegions.includes(regionInfo.id)">
-            <ConquererCard v-for="(team, index) in regionInfo.conquerer" :title="team" :order="index + 1"></ConquererCard>
+            <ConquererCard v-for="(team, index) in regionInfo.conquerer" :title="team" :order="index + 1">
+            </ConquererCard>
         </div>
         <div v-else>
             <div class="quest" v-if="getUser.assignedRegionId !== regionInfo.id">
                 <p class="quest-title">Quest</p>
-                <p>{{ regionInfo.quest }}</p>
+                <p>{{ quests[getQuest(regionInfo.name, getUser.teamId)] }}</p>
             </div>
             <div class="button-container" v-if="getUser.assignedRegionId === '' && getUser.isTeamLead">
                 <button @click="accept">ENTER</button>
@@ -23,7 +24,7 @@
             <div class="quest-submission" v-else-if="getUser.assignedRegionId === regionInfo.id">
                 <div class="quest">
                     <p class="quest-title">Quest</p>
-                    <p>{{ regionInfo.quest }}</p>
+                    <p>{{ quests[getQuest(regionInfo.name, getUser.teamId)] }}</p>
                 </div>
                 <div id="qrcode"></div>
             </div>
@@ -52,11 +53,19 @@ export default {
     data() {
         return {
             myTeamData: {},
+            quests: {
+                q1: "Bible verses",
+                q2: "Film Scene",
+                q3: "Bracelet",
+                q4: "Puzzle",
+                q5: "Sketch",
+                q6: "Volley with Leaders",
+            }
         }
     },
     computed: mapGetters(['getUser', 'getTeamData']),
     methods: {
-        
+
         ...mapActions(['updateUser']),
         decline() {
             this.$emit('close')
@@ -70,7 +79,7 @@ export default {
                 const userDoc = doc(userCollectionReference, this.getUser.uid);
                 updateDoc(userDoc, { assignedRegionId: this.regionInfo.id })
                 let updatedUser = this.getUser;
-                updatedUser.assignedRegionId =  this.regionInfo.id;
+                updatedUser.assignedRegionId = this.regionInfo.id;
                 this.updateUser(updatedUser);
                 alert("Land quest started successfuly!")
             } else {
@@ -90,6 +99,80 @@ export default {
                     console.log('QR code generated!');
                 }
             });
+        },
+        getQuest(regionName, teamName) {
+            if (regionName === "Love") {
+                switch (teamName) {
+                    case 'Aburame':
+                        return 'q1';
+                    case 'Akamichi':
+                        return 'q2';
+                    case 'Uchiha':
+                        return 'q3';
+                    case 'Uzumaki':
+                        return 'q5';
+                }
+            }
+            if (regionName === "Compassion") {
+                switch (teamName) {
+                    case 'Aburame':
+                        return 'q5';
+                    case 'Akamichi':
+                        return 'q3';
+                    case 'Uchiha':
+                        return 'q4';
+                    case 'Uzumaki':
+                        return 'q6';
+                }
+            }
+            if (regionName === "Joy") {
+                switch (teamName) {
+                    case 'Aburame':
+                        return 'q2';
+                    case 'Akamichi':
+                        return 'q1';
+                    case 'Uchiha':
+                        return 'q6';
+                    case 'Uzumaki':
+                        return 'q4';
+                }
+            }
+            if (regionName === "Mercy") {
+                switch (teamName) {
+                    case 'Aburame':
+                        return 'q3';
+                    case 'Akamichi':
+                        return 'q6';
+                    case 'Uchiha':
+                        return 'q2';
+                    case 'Uzumaki':
+                        return 'q1';
+                }
+            }
+            if (regionName === "Holy") {
+                switch (teamName) {
+                    case 'Aburame':
+                        return 'q6';
+                    case 'Akamichi':
+                        return 'q4';
+                    case 'Uchiha':
+                        return 'q5';
+                    case 'Uzumaki':
+                        return 'q2';
+                }
+            }
+            if (regionName === "Peace") {
+                switch (teamName) {
+                    case 'Aburame':
+                        return 'q4';
+                    case 'Akamichi':
+                        return 'q5';
+                    case 'Uchiha':
+                        return 'q1';
+                    case 'Uzumaki':
+                        return 'q3';
+                }
+            }
         }
     },
     mounted() {

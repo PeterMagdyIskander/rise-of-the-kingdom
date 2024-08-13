@@ -78,8 +78,8 @@ export default createStore({
         const allUsers = userSnapshot;
         let newUser = !allUsers.includes(res.user.uid);
         let user = null;
-        const playerData = assignationData.filter(data => data.playerMail === res.user.email)[0];
-
+        const playerData = assignationData.filter(data => data.playerMail.toLowerCase() === res.user.email.toLowerCase())[0];
+        console.log(playerData)
         if (newUser) {
           user = {
             uid: res.user.uid,

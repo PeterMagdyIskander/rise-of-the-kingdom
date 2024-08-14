@@ -154,13 +154,13 @@ export default {
             left: 0px;
         }
 
-        .mercy {
+        .kind {
             position: absolute;
             top: 106px;
             left: 110px;
         }
 
-        .compassion {
+        .patience {
             position: absolute;
             top: 167px;
             left: 190px;

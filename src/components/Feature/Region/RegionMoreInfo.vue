@@ -1,7 +1,7 @@
 <template>
     <div class="info">
         <div class="title">
-            <p class="main">{{ regionInfo.name }}</p>
+            <p class="main">{{ regionInfo.name }} Land</p>
             <div class="humanity-points">
                 <img src="@/assets/humanityPoints-icon.svg" alt="humanity points icon">
                 <p>{{ regionInfo.gold }}</p>
@@ -113,7 +113,7 @@ export default {
                         return 'q5';
                 }
             }
-            if (regionName === "Compassion") {
+            if (regionName === "Kind") {
                 switch (teamName) {
                     case 'Aburame':
                         return 'q5';
@@ -137,7 +137,7 @@ export default {
                         return 'q4';
                 }
             }
-            if (regionName === "Mercy") {
+            if (regionName === "Patience") {
                 switch (teamName) {
                     case 'Aburame':
                         return 'q3';

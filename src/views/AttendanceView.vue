@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { collection, getFirestore, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getFirestore, getDoc,doc, updateDoc, increment } from 'firebase/firestore';
 
 import { mapActions, mapGetters } from 'vuex';
 export default {

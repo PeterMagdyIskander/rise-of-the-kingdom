@@ -13,7 +13,7 @@ export default {
     name: "region-submission-view",
     computed: mapGetters(['getUser', 'getQuests', 'getLoading', 'getFailed', mapActions]),
     mounted() {
-        this.submitQuest(uid)
+        this.submitQuest()
     },
     data() {
         return {
@@ -21,7 +21,7 @@ export default {
         }
     },
     methods: {
-        async submitQuest(uid) {
+        async submitQuest() {
             const uid = this.$route.path.split('/')[2];
             const firestore = getFirestore();
             const userCollectionReference = collection(firestore, 'users');

@@ -176,12 +176,13 @@ export default {
         }
     },
     mounted() {
-        if (this.getUser.assignedRegionId === this.regionInfo.id) {
+        if (this.getUser.assignedRegionId === this.regionInfo.id&&!this.getTeamData.conqueredRegions.includes(this.regionInfo.id)) {
             this.generateQRCode()
         }
+        
     },
     updated() {
-        if (this.getUser.assignedRegionId === this.regionInfo.id) {
+        if (this.getUser.assignedRegionId === this.regionInfo.id&&!this.getTeamData.conqueredRegions.includes(this.regionInfo.id)) {
             this.generateQRCode()
         }
     }

@@ -4,14 +4,14 @@ import { collection, doc, getFirestore, onSnapshot, setDoc } from 'firebase/fire
 
 function areCredentialsValid(credentials) {
   if (!credentials) return false;
-  if (!credentials.user.isAdmin) return false
+  if (credentials.user.isAdmin===false) return false
   const { token, expiry } = credentials;
   const now = new Date().getTime();
   return token && expiry && now < expiry;
 }
 
 export function saveCredentials(credentials) {
-  if (credentials.user.isAdmin)
+  if (credentials.user.isAdmin===true)
     localStorage.setItem('userCredentials', JSON.stringify(credentials));
 }
 
@@ -86,9 +86,9 @@ export default createStore({
             name: res.user.displayName,
             assignedQuestId: "",
             assignedRegionId: "",
-            isTeamLead: playerData?.isTeamLead || 'dev',
-            teamId: playerData?.teamId || 'dev',
-            isAdmin: playerData?.isAdmin || 'dev',
+            isTeamLead: playerData?.isTeamLead || false,
+            teamId: playerData?.teamId || 'Uchiha',
+            isAdmin: playerData?.isAdmin || false,
             email: res.user.email,
             humanityPoints: 0
           }

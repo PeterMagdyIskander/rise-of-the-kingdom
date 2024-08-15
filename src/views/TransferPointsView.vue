@@ -26,7 +26,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { collection, getFirestore, onSnapshot, doc, updateDoc, increment, serverTimestamp } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, doc, updateDoc, increment, serverTimestamp ,arrayUnion} from 'firebase/firestore';
 import BaseContainer from '@/components/Feature/Base/BaseContainer.vue';
 
 export default {
@@ -86,7 +86,6 @@ export default {
                         giveBackGold: increment(this.giveBackGold),
                         gold: increment((this.giveBackGold * -1)),
                         showGrace: true,
-                        timestamps: arrayUnion(serverTimestamp()),  // Add current server timestamp to the timestamps array
                     })
                     updateDoc(selectedTeamDoc, {
                         gold: increment(this.giveBackGold),
@@ -96,7 +95,6 @@ export default {
                     updateDoc(myTeamDoc, {
                         giveBackGold: increment(this.giveBackGold),
                         gold: increment(this.giveBackGold * -1),
-                        timestamps: arrayUnion(serverTimestamp()),  // Add current server timestamp to the timestamps array  
                     })
                     updateDoc(selectedTeamDoc, {
                         gold: increment(this.giveBackGold),

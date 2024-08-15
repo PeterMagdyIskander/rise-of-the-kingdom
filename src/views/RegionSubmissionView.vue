@@ -1,5 +1,8 @@
 <template>
     <div>
+        <button @click="submitQuest()" :disabled="pointsReflectedSuccessfuly">
+            {{ pointsReflectedSuccessfuly ? "SUCCESS" : "REFRESH" }}
+        </button>
     </div>
 </template>
 <script>
@@ -10,11 +13,16 @@ export default {
     name: "region-submission-view",
     computed: mapGetters(['getUser', 'getQuests', 'getLoading', 'getFailed', mapActions]),
     mounted() {
-        const uid = this.$route.path.split('/')[2]
-        this.submitQuest(uid)
+        this.submitQuest()
+    },
+    data() {
+        return {
+            pointsReflectedSuccessfuly: false
+        }
     },
     methods: {
-        async submitQuest(uid) {
+        async submitQuest() {
+            const uid = this.$route.path.split('/')[2];
             const firestore = getFirestore();
             const userCollectionReference = collection(firestore, 'users');
             const teamCollectionReference = collection(firestore, 'teams');
@@ -48,11 +56,16 @@ export default {
                     updateDoc(regionDoc, {
                         conquerer: arrayUnion(user.teamId),
                     })
+                    this.pointsReflectedSuccessfuly = true;
+
+                    
                     alert("Region conquered successfuly!")
                 } else {
                     console.log("No such document!");
                 }
             } catch (error) {
+                
+                alert("ERROR DATA NOT REFLECTED")
                 console.error(error);
             }
         }
@@ -61,4 +74,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+div {
+    text-align: center;
+    padding: 250px 0;
+
+    button {
+        all: unset;
+        font-family: 'pressstart2p';
+        color: #f4ee80;
+        font-size: 3rem;
+        text-shadow: 0 5px #a14759;
+    }
+}</style>

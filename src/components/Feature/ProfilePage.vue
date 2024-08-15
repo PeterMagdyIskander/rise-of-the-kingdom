@@ -34,17 +34,18 @@
                 <h1 class="planet-title" :class="getUser.teamId">{{ getUser.teamId }}</h1>
                 <div class="health-section">
                     <div class="health-section-container" :style="{
-                        'border': `2px solid ${getColor()}`,
-                        'background-color': getBEColor(),
-                    }">
+                'border': `2px solid ${getColor()}`,
+                'background-color': getBEColor(),
+            }">
                         <div class="health-section-container-health" :style="{
-                            width: (getTeamData?.conqueredRegions.length / 6) * 100 + '%',
-                            'border': `2px solid ${getColor()}`,
-                            'background-color': getColor(),
-                        }">
+                width: calculateWidth() * 100 + '%',
+                'border': `2px solid ${getColor()}`,
+                'background-color': getColor(),
+            }">
                         </div>
                     </div>
-                    <p class="region-count">{{ `${getTeamData?.conqueredRegions.length} / 6` }}</p>
+                    <p class="region-count">{{ `${getTeamData?.conqueredRegions.length} /
+                        ${getTeamData?.showGrace ? '7' : '6'}` }}</p>
                 </div>
 
             </div>
@@ -101,6 +102,11 @@ export default {
             }
         }, navigateTo(to) {
             this.$router.push(to);
+        },
+        calculateWidth() {
+            if (this.myTeamData.showGrace)
+                return (myTeamData?.conqueredRegions.length / 7)
+            return (myTeamData?.conqueredRegions.length / 6)
         }
     }
 }

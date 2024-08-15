@@ -8,14 +8,14 @@
         <h4 class="planet-title" :class="teamId">{{ teamId }}</h4>
         <div class="health-section">
             <div class="health-section-container" :style="{
-                'border': `2px solid ${getColor()}`,
-                'background-color': getBEColor(),
-            }">
+        'border': `2px solid ${getColor()}`,
+        'background-color': getBEColor(),
+    }">
                 <div class="health-section-container-health" :style="{
-                    width: (myTeamData?.conqueredRegions.length / 6) * 100 + '%',
-                    'border': `2px solid ${getColor()}`,
-                    'background-color': getColor(),
-                }">
+        width: calculateWidth() * 100 + '%',
+        'border': `2px solid ${getColor()}`,
+        'background-color': getColor(),
+    }">
                 </div>
             </div>
         </div>
@@ -76,6 +76,11 @@ export default {
             }
         }, navigateTo(to) {
             this.$router.push(to);
+        },
+        calculateWidth() {
+            if (this.myTeamData.showGrace)
+                return (myTeamData?.conqueredRegions.length / 7)
+            return (myTeamData?.conqueredRegions.length / 6)
         }
     }
 }

@@ -104,9 +104,9 @@ export default {
             this.$router.push(to);
         },
         calculateWidth() {
-            if (this.myTeamData.showGrace)
-                return (myTeamData?.conqueredRegions.length / 7)
-            return (myTeamData?.conqueredRegions.length / 6)
+            if (this.getTeamData?.showGrace)
+                return (this.getTeamData?.conqueredRegions.length / 7)
+            return (this.getTeamData?.conqueredRegions.length / 6)
         }
     }
 }

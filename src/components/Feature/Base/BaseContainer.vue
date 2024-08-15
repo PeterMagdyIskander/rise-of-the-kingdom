@@ -78,9 +78,9 @@ export default {
             this.$router.push(to);
         },
         calculateWidth() {
-            if (this.myTeamData.showGrace)
-                return (myTeamData?.conqueredRegions.length / 7)
-            return (myTeamData?.conqueredRegions.length / 6)
+            if (this.myTeamData?.showGrace)
+                return (this.myTeamData?.conqueredRegions.length / 7)
+            return (this.myTeamData?.conqueredRegions.length / 6)
         }
     }
 }

@@ -50,7 +50,7 @@ export default {
     created() {
     },
     mounted() {
-        if (!this.correctTime()||!this.getUser.isTeamLead)
+        if (!this.correctTime())
             this.$router.push("/");
         const firestore = getFirestore();
         const teamCollectionReference = collection(firestore, 'teams');
@@ -107,7 +107,7 @@ export default {
             const date = new Date();
             const hour = date.getHours();
             const minutes = date.getMinutes();
-            return hour === 21 && minutes <= 30;
+            return hour === 21 && minutes <= 30 && this.getUser.isTeamLead;
         }
     }
 }

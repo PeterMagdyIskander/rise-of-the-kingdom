@@ -81,6 +81,12 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/AddPoints",
+    name: "AddPoints",
+    component: () => import("../views/AddPointsView.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/TransferPoints",
     name: "TransferPoints",
     component: () => import("../views/TransferPointsView.vue"),

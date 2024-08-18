@@ -87,6 +87,12 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/LeaderboardTeams",
+    name: "LeaderboardTeams",
+    component: () => import("../views/LeaderboardTeamsView.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/AddPoints",
     name: "AddPoints",
     component: () => import("../views/AddPointsView.vue"),

@@ -28,6 +28,8 @@
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
                 to="/LeaderboardHp">Leaderboard HP</router-link></li> 
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
+                to="/LeaderboardTeams">Leaderboard Teams</router-link></li> 
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
                 to="/AddPoints">Add Points</router-link></li>
 
           </ul>

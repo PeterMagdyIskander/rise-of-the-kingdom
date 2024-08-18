@@ -22,9 +22,11 @@
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link to="/AddTeam">Add
                 Team</router-link></li>
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
-                to="/AssignPlayers">Assign Players</router-link></li>
+                to="/AssignPlayers">Assign Players</router-link></li>-->
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
-                to="/Leaderboard">Leaderboard</router-link></li> -->
+                to="/LeaderboardGold">Leaderboard Gold</router-link></li> 
+            <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
+                to="/LeaderboardHp">Leaderboard HP</router-link></li> 
             <li class="sidemenu__item" @click="closeMenu" v-if="getUser.isAdmin === true"><router-link
                 to="/AddPoints">Add Points</router-link></li>
 

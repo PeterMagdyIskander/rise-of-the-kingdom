@@ -75,9 +75,15 @@ const routes = [
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
-    path: "/Leaderboard",
-    name: "Leaderboard",
+    path: "/LeaderboardGold",
+    name: "LeaderboardGold",
     component: () => import("../views/LeaderboardView.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/LeaderboardHp",
+    name: "LeaderboardHp",
+    component: () => import("../views/LeaderboardHPView.vue"),
     meta: { requiresAuth: true },
   },
   {

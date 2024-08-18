@@ -9,7 +9,7 @@
                     <tr>
                         <th>Rank</th>
                         <th>User ID</th>
-                        <th>Gold</th>
+                        <th>HP</th>
                         <th>Team </th>
                     </tr>
                 </thead>
@@ -17,7 +17,7 @@
                     <tr v-for="(user, index) in leaderboard" :key="user.id">
                         <td>{{ index + 1 }}</td>
                         <td>{{ user.name }}</td>
-                        <td>{{ user.gold }}</td>
+                        <td>{{ user.humanityPoints }}</td>
                         <td>{{ user.teamId }}</td>
                     </tr>
                 </tbody>
@@ -43,14 +43,14 @@ export default {
     created() {
         const db = getFirestore();
         const usersCollection = collection(db, 'users');
-        const q = query(usersCollection, orderBy('gold', 'desc'));
+        const q = query(usersCollection, orderBy('humanityPoints', 'desc'));
 
         onSnapshot(q, (querySnapshot) => {
             const leaderboard = [];
             querySnapshot.forEach((doc) => {
                 leaderboard.push({ id: doc.id, ...doc.data() });
             });
-            this.leaderboard = leaderboard.filter(e => e.isAdmin === false);
+            this.leaderboard = leaderboard.filter(e=>e.isAdmin===false);
         });
     }
 };
@@ -67,7 +67,7 @@ table {
     border-collapse: separate;
     border-spacing: 10px;
     font-size: 36px;
-
+    
     text-align: left;
 }
 </style>
